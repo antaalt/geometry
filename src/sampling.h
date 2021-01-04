@@ -13,6 +13,10 @@ struct CylindricalCoordinate {
 	
 	explicit operator vec3<T>() const;
 	explicit operator CylindricalCoordinate<T>() const;
+private:
+	radian<T> phi;
+	radian<T> theta;
+	float r;
 };
 
 template <typename T>
@@ -57,19 +61,19 @@ private:
 template <typename T>
 vec3<T> reflect(const vec3<T> &wi, const norm3<T> &normal)
 {
-	vec3f n(normal);
-	return wi - 2.f * vec3f::dot(wi, n) * n;
+	vec3<T> n(normal);
+	return wi - 2.f * vec3<T>::dot(wi, n) * n;
 }
 
 template <typename T>
 bool refract(vec3<T> &wo, const vec3<T> &wi, const norm3<T> &normal, float eta)
 {
-	vec3f n(normal);
-	float NdotV = vec3f::dot(wi, vec3f(n));
+	vec3<T> n(normal);
+	float NdotV = vec3<T>::dot(wi, vec3<T>(n));
 	float k = 1.f - eta * eta * (1.f - NdotV * NdotV);
 	if (k < 0.f)
 		return true;
-	wo = vec3f::normalize(eta * wi - (eta*NdotV + geometry::sqrt(k)) * vec3f(n));
+	wo = vec3<T>::normalize(eta * wi - (eta*NdotV + geometry::sqrt(k)) * vec3<T>(n));
 	return false;
 }
 

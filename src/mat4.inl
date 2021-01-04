@@ -298,6 +298,15 @@ inline mat4<T> mat4<T>::inverse(const mat4 &mat)
 		)
 	);
 }
+template <typename T>
+inline mat4<T> mat4<T>::transpose(const mat4& mat)
+{
+	mat4<T> output;
+	for (uint8_t x = 0; x < 4; x++)
+		for (uint8_t y = 0; y < 4; y++)
+			output[x][y] = mat[y][x];
+	return output;
+}
 
 template <typename T>
 inline mat4<T> mat4<T>::perspective(const radian<T> &fov, float ratio, float nearZ, float farZ)

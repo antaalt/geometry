@@ -1,6 +1,5 @@
 #pragma once
 
-#include "gpu.h"
 #include "scientific.h"
 #include "sampling.h"
 #include "angle.h"
@@ -54,7 +53,6 @@ using radianf = radian<float>;
 
 }
 
-#include "gpu.inl"
 #include "scientific.inl"
 #include "sampling.inl"
 #include "angle.inl"
