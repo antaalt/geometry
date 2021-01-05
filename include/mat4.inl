@@ -321,6 +321,17 @@ inline mat4<T> mat4<T>::perspective(const radian<T> &fov, float ratio, float nea
 	);
 }
 
+template <typename T>
+inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float right, float nearZ, float farZ)
+{
+	return mat4(
+		col4<T>(T(2) / (right-left), T(0), T(0), -(right+left)/(right-left)),
+		col4<T>(T(0), T(2)/(top-bottom),   T(0), -(top + bottom) / (top - bottom)),
+		col4<T>(T(0), T(0), -T(2)/(farZ-nearZ), -(farZ+nearZ)/(farZ-nearZ)),
+		col4<T>(T(0), T(0), T(0), T(1))
+	);
+}
+
 template<typename T>
 inline mat4<T> mat4<T>::lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> & up)
 {

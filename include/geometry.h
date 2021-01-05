@@ -30,11 +30,16 @@ using norm3d = norm3<double>;
 
 using vec2f = vec2<float>;
 using vec2d = vec2<double>;
+using vec2i = vec2<int32_t>;
+using vec2u = vec2<uint32_t>;
 using vec3f = vec3<float>;
 using vec3d = vec3<double>;
 using vec4f = vec4<float>;
 using vec4d = vec4<double>;
 
+// TODO create true color3 class
+using color3f = vec3<float>;
+using color24 = vec3<uint8_t>;
 using color4f = color4<float>;
 using color32 = color4<uint8_t>;
 
