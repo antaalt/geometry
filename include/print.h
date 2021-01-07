@@ -21,6 +21,12 @@ inline std::ostream& operator <<(std::ostream& os, const uv2<T>& vec)
 	return os;
 }
 template <typename T>
+inline std::ostream& operator <<(std::ostream& os, const vec2<T>& vec)
+{
+	os << "vec2(" << vec.x << ", " << vec.y << ")";
+	return os;
+}
+template <typename T>
 inline std::ostream& operator <<(std::ostream& os, const vec3<T>& vec)
 {
 	os << "vec3(" << vec.x << ", " << vec.y << ", " << vec.z << ")";

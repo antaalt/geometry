@@ -140,7 +140,7 @@ inline mat4<T> &operator*=(mat4<T>& lhs, const mat4<T> &rhs)
 	for (int iCol = 0; iCol < 4; iCol++)
 		for (int iRow = 0; iRow < 4; iRow++)
 			for (int k = 0; k < 4; k++)
-				out[iCol][iRow] += rhs[iCol][k] * lhs[k][iRow];
+				out[iCol][iRow] += lhs[k][iRow] * rhs[iCol][k];
 	return (lhs = out);
 }
 
@@ -325,10 +325,10 @@ template <typename T>
 inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float right, float nearZ, float farZ)
 {
 	return mat4(
-		col4<T>(T(2) / (right-left), T(0), T(0), -(right+left)/(right-left)),
-		col4<T>(T(0), T(2)/(top-bottom),   T(0), -(top + bottom) / (top - bottom)),
-		col4<T>(T(0), T(0), -T(2)/(farZ-nearZ), -(farZ+nearZ)/(farZ-nearZ)),
-		col4<T>(T(0), T(0), T(0), T(1))
+		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
+		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0) ),
+		col4<T>(T(0), T(0), -T(2) / (farZ - nearZ), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
 	);
 }
 
