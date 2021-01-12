@@ -2,6 +2,7 @@
 #include "vec3.h"
 #include "vec4.h"
 #include "uv2.h"
+#include "scientific.h"
 
 
 namespace geometry {
@@ -67,6 +68,18 @@ inline T vec2<T>::dot(const vec2 &lhs, const vec2 &rhs)
 }
 
 template <typename T>
+inline vec2<T> vec2<T>::normalize(const vec2& vec)
+{
+	return vec / vec.norm();
+}
+
+template <typename T>
+inline vec2<T> vec2<T>::abs(const vec2<T>& vec)
+{
+	return vec2<T>(geometry::abs<T>(vec.x), geometry::abs<T>(vec.y));
+}
+
+template <typename T>
 inline bool operator==(const vec2<T> & lhs, const vec2<T> & rhs)
 {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
@@ -76,6 +89,34 @@ template <typename T>
 inline bool operator!=(const vec2<T> &lhs, const vec2<T> &rhs)
 {
 	return !(lhs == rhs);
+}
+
+template <typename T>
+inline bool operator<(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	if      (lhs.x < rhs.x) return true; 
+	else if (lhs.x > rhs.x) return false;
+	return  (lhs.y < rhs.y);
+}
+
+template <typename T>
+inline bool operator>(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	if      (lhs.x > rhs.x) return true;
+	else if (lhs.x < rhs.x) return false;
+	return  (lhs.y > rhs.y);
+}
+
+template <typename T>
+inline bool operator<=(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	return (lhs < rhs) || (lhs == rhs);
+}
+
+template <typename T>
+inline bool operator>=(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	return (lhs > rhs) || (lhs == rhs);
 }
 
 template <typename T>

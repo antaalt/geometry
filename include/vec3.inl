@@ -22,6 +22,12 @@ inline vec3<T>::vec3(T x, T y, T z) :
 	x(x), y(y), z(z)
 {
 }
+template <typename T>
+template <typename U>
+inline vec3<T>::vec3(U x, U y, U z) :
+	x(static_cast<T>(x)), y(static_cast<T>(y)), z(static_cast<T>(z))
+{
+}
 
 template <typename T>
 inline vec3<T>::vec3(const norm3<T> &normal) : 

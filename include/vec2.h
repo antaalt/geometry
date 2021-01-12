@@ -33,12 +33,22 @@ struct vec2 {
 	T norm() const;
 
 	static T dot(const vec2 &lhs, const vec2 &rhs);
+	static vec2<T> normalize(const vec2& vec);
+	static vec2<T> abs(const vec2<T>& vec);
 };
 
 template <typename T>
 bool operator==(const vec2<T> & lhs, const vec2<T> & rhs);
 template <typename T>
 bool operator!=(const vec2<T> &lhs, const vec2<T> &rhs);
+template <typename T>
+bool operator<(const vec2<T>& lhs, const vec2<T>& rhs);
+template <typename T>
+bool operator>(const vec2<T>& lhs, const vec2<T>& rhs);
+template <typename T>
+bool operator<=(const vec2<T>& lhs, const vec2<T>& rhs);
+template <typename T>
+bool operator>=(const vec2<T>& lhs, const vec2<T>& rhs);
 
 template <typename T>
 vec2<T> operator*(const vec2<T> &lhs, T rhs);

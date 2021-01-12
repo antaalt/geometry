@@ -59,21 +59,25 @@ private:
 };
 
 template <typename T>
+vec2<T> reflect(const vec2<T>& wi, const vec2<T>& normal)
+{
+	return wi - 2.f * vec2<T>::dot(wi, normal) * normal;
+}
+
+template <typename T>
 vec3<T> reflect(const vec3<T> &wi, const norm3<T> &normal)
 {
-	vec3<T> n(normal);
-	return wi - 2.f * vec3<T>::dot(wi, n) * n;
+	return wi - 2.f * vec3<T>::dot(wi, normal) * normal;
 }
 
 template <typename T>
 bool refract(vec3<T> &wo, const vec3<T> &wi, const norm3<T> &normal, float eta)
 {
-	vec3<T> n(normal);
-	float NdotV = vec3<T>::dot(wi, vec3<T>(n));
+	float NdotV = vec3<T>::dot(wi, vec3<T>(normal));
 	float k = 1.f - eta * eta * (1.f - NdotV * NdotV);
 	if (k < 0.f)
 		return true;
-	wo = vec3<T>::normalize(eta * wi - (eta*NdotV + geometry::sqrt(k)) * vec3<T>(n));
+	wo = vec3<T>::normalize(eta * wi - (eta*NdotV + geometry::sqrt(k)) * vec3<T>(normal));
 	return false;
 }
 
