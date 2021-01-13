@@ -80,6 +80,24 @@ inline vec2<T> vec2<T>::abs(const vec2<T>& vec)
 }
 
 template <typename T>
+inline vec2<T> (vec2<T>::min)(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	return vec2f(
+		(geometry::min)(lhs.x, rhs.x),
+		(geometry::min)(lhs.y, rhs.y)
+	);
+}
+
+template <typename T>
+inline vec2<T>(vec2<T>::max)(const vec2<T>& lhs, const vec2<T>& rhs)
+{
+	return vec2f(
+		(geometry::max)(lhs.x, rhs.x),
+		(geometry::max)(lhs.y, rhs.y)
+	);
+}
+
+template <typename T>
 inline bool operator==(const vec2<T> & lhs, const vec2<T> & rhs)
 {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
