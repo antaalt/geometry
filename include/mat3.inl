@@ -18,6 +18,11 @@ inline col3<T>::col3(T value) : x(value), y(value), z(value)
 }
 
 template <typename T>
+inline col3<T>::col3(const vec2<T>& xy, T z) : x(xy.x), y(xy.y), z(z)
+{
+}
+
+template <typename T>
 inline col3<T>::col3(T x, T y, T z) : x(x), y(y), z(z)
 {
 }
@@ -41,15 +46,6 @@ inline mat3<T>::mat3()
 
 template <typename T>
 inline mat3<T>::mat3(T value) : cols{ col(value), col(value), col(value) }
-{
-}
-
-template <typename T>
-inline mat3<T>::mat3(const mat4<T> & mat) : cols{
-	col(mat[0].x, mat[0].y, mat[0].z),
-	col(mat[1].x, mat[1].y, mat[1].z),
-	col(mat[2].x, mat[2].y, mat[2].z)
-}
 {
 }
 
@@ -81,6 +77,42 @@ inline mat3<T> mat3<T>::identity()
 }
 
 template <typename T>
+inline mat3<T> mat3<T>::translate(const vec2<T>& translation)
+{
+	return mat3(
+		col3<T>(1.f, 0.f, 0.f),
+		col3<T>(0.f, 1.f, 0.f),
+		col3<T>(translation, 1.f)
+	);
+}
+
+template <typename T>
+inline mat3<T> mat3<T>::rotate(radian<T> angle)
+{
+	return mat3(
+		col3<T>(cos(angle), -sin(angle), 0.f),
+		col3<T>(sin(angle), cos(angle), 0.f),
+		col3<T>(0.f, 1.f)
+	);
+}
+
+template <typename T>
+inline mat3<T> mat3<T>::scale(const vec2<T>& scale)
+{
+	return mat3(
+		col3<T>(scale.x, 0.f, 0.f),
+		col3<T>(0.f, scale.y, 0.f),
+		col3<T>(0.f, 0.f, 1.f)
+	);
+}
+
+template <typename T>
+inline mat3<T> mat3<T>::TRS(const vec2<T>& t, radian<T> r, const vec2<T>& s)
+{
+	return scale(s) * rotate(r) * translate(t);
+}
+
+template <typename T>
 inline mat3<T> operator*(const mat3<T>& lhs, const mat3<T> &rhs)
 {
 	mat3<T> out(0.f);
@@ -92,12 +124,11 @@ inline mat3<T> operator*(const mat3<T>& lhs, const mat3<T> &rhs)
 }
 
 template <typename T>
-inline norm3<T> operator*(const mat3<T>& lhs, const norm3<T> &rhs)
+vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs)
 {
-	return norm3<T>(
-		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x * rhs.z + lhs[3].x,
-		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y * rhs.z + lhs[3].y,
-		lhs[0].z * rhs.x + lhs[1].z * rhs.y + lhs[2].z * rhs.z + lhs[3].z
+	return vec2<T>(
+		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x,
+		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y
 	);
 }
 
