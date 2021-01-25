@@ -45,7 +45,7 @@ inline mat3<T>::mat3()
 }
 
 template <typename T>
-inline mat3<T>::mat3(T value) : cols{ col(value), col(value), col(value) }
+inline mat3<T>::mat3(T value) : cols{ col3(value), col3(value), col3(value) }
 {
 }
 
@@ -64,6 +64,24 @@ template <typename T>
 inline const col3<T> & mat3<T>::operator[](size_t index) const
 {
 	return cols[index];
+}
+
+template <typename T>
+vec2<T> mat3<T>::multiplyPoint(const vec2<T>& point) const
+{
+	return vec2<T>(
+		cols[0].x * point.x + cols[1].x * point.y + cols[2].x,
+		cols[0].y * point.x + cols[1].y * point.y + cols[2].y
+	);
+}
+
+template <typename T>
+vec2<T> mat3<T>::multiplyVector(const vec2<T>& point) const
+{
+	return vec2<T>(
+		cols[0].x * point.x + cols[1].x * point.y,
+		cols[0].y * point.x + cols[1].y * point.y
+		);
 }
 
 template <typename T>
@@ -92,7 +110,7 @@ inline mat3<T> mat3<T>::rotate(radian<T> angle)
 	return mat3(
 		col3<T>(cos(angle), -sin(angle), 0.f),
 		col3<T>(sin(angle), cos(angle), 0.f),
-		col3<T>(0.f, 1.f)
+		col3<T>(0.f, 0.f, 1.f)
 	);
 }
 
@@ -130,6 +148,17 @@ vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs)
 		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x,
 		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y
 	);
+}
+
+template <typename T>
+mat3<T>& operator*=(mat3<T>& lhs, const mat3<T>& rhs)
+{
+	mat3<T> out(0.f);
+	for (int iCol = 0; iCol < 3; iCol++)
+		for (int iRow = 0; iRow < 3; iRow++)
+			for (int k = 0; k < 3; k++)
+				out[iCol][iRow] += lhs[k][iRow] * rhs[iCol][k];
+	return (lhs = out);
 }
 
 }

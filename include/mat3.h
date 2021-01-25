@@ -38,6 +38,9 @@ struct mat3 {
 	col3<T> &operator[](size_t index);
 	const col3<T> &operator[](size_t index) const;
 
+	vec2<T> multiplyPoint(const vec2<T>& point) const;
+	vec2<T> multiplyVector(const vec2<T>& point) const;
+
 	static mat3 identity();
 	static mat3 translate(const vec2<T>& translation);
 	static mat3 rotate(radian<T> angle);
@@ -49,5 +52,7 @@ template <typename T>
 mat3<T> operator*(const mat3<T>& lhs, const mat3<T> &rhs);
 template <typename T>
 vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs);
+template <typename T>
+mat3<T>& operator*=(mat3<T>& lhs, const mat3<T>& rhs);
 
 }
