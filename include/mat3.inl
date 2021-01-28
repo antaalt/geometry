@@ -45,7 +45,7 @@ inline mat3<T>::mat3()
 }
 
 template <typename T>
-inline mat3<T>::mat3(T value) : cols{ col3(value), col3(value), col3(value) }
+inline mat3<T>::mat3(T value) : cols{ col3<T>(value), col3<T>(value), col3<T>(value) }
 {
 }
 
