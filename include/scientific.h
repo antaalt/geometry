@@ -20,6 +20,7 @@ template <typename T> T clamp(T value, T min, T max);
 template <typename T> T cos(radian<T> value);
 template <typename T> T sin(radian<T> value);
 template <typename T> T tan(radian<T> value);
+template <typename T> T cot(radian<T> value);
 template <typename T> radian<T> arccos(T value);
 template <typename T> radian<T> arcsin(T value);
 template <typename T> radian<T> arctan(T value);

@@ -1,5 +1,16 @@
 #pragma once
 
+// If no user settings defined, set the default coordinate system as right handed
+#if !defined(GEOMETRY_LEFT_HANDED) || !defined(GEOMETRY_RIGHT_HANDED)
+#define GEOMETRY_RIGHT_HANDED
+#endif
+// If no user settings defined, set the default clip space to GEOMETRY_CLIP_SPACE_NEGATIVE
+// GEOMETRY_CLIP_SPACE_NEGATIVE -> clip space [-1, 1] (GL)
+// GEOMETRY_CLIP_SPACE_POSITIVE -> clip space [0, 1] (D3D)
+#if !defined(GEOMETRY_CLIP_SPACE_NEGATIVE) || !defined(GEOMETRY_CLIP_SPACE_POSITIVE)
+#define GEOMETRY_CLIP_SPACE_NEGATIVE
+#endif
+
 #include "scientific.h"
 #include "sampling.h"
 #include "angle.h"

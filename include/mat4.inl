@@ -25,6 +25,14 @@ inline col4<T>::col4(T x, T y, T z, T w) :
 }
 
 template <typename T>
+template <typename U>
+inline col4<T>::col4(U x, U y, U z, U w) :
+	x((T)x), y((T)y), z((T)z), w((T)w)
+{
+
+}
+
+template <typename T>
 inline col4<T>::col4(norm3<T> vec, T w) :
 	x(vec.x), y(vec.y), z(vec.z), w(w)
 {
@@ -309,15 +317,40 @@ inline mat4<T> mat4<T>::transpose(const mat4& mat)
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::perspective(const radian<T> &fov, float ratio, float nearZ, float farZ)
+inline mat4<T> mat4<T>::perspective(const radian<T> &fovY, float ratio, float zNear, float zFar)
 {
-	T f = 1.f / tan(fov / 2.f);
-	float range = 1.f / (farZ - nearZ);
+	const T f = T(1) / tan(fovY / T(2));
 	return mat4(
 		col4<T>(f / ratio, T(0), T(0), T(0)),
-		col4<T>(T(0), -f, T(0), T(0)),
-		col4<T>(T(0), T(0), (farZ + nearZ) * range, T(1)),
-		col4<T>(T(0), T(0), -(2.f * farZ * nearZ) * range, T(0))
+		col4<T>(T(0), f, T(0), T(0)),
+#if defined(GEOMETRY_RIGHT_HANDED)
+#if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
+		col4<T>(T(0), T(0), zFar / (zNear - zFar), -T(1)),
+		col4<T>(T(0), T(0), -(zFar * zNear) / (zFar - zNear), T(0))
+#elif defined(GEOMETRY_CLIP_SPACE_NEGATIVE)
+		col4<T>(T(0), T(0), -(zFar + zNear) / (zFar - zNear), -T(1)),
+		col4<T>(T(0), T(0), -(T(2) * zFar * zNear) / (zFar - zNear), T(0))
+#endif
+#elif defined(GEOMETRY_LEFT_HANDED)
+#if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
+		col4<T>(T(0), T(0), zFar / (zFar - zNear), T(1)),
+		col4<T>(T(0), T(0), -(zFar * zNear) / (zFar - zNear), T(0))
+#elif defined(GEOMETRY_CLIP_SPACE_NEGATIVE)
+		col4<T>(T(0), T(0), (zFar + zNear) / (zFar - zNear), T(1)),
+		col4<T>(T(0), T(0), -(T(2) * zFar * zNear) / (zFar - zNear), T(0))
+#endif
+#endif
+	);
+}
+
+template <typename T>
+inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float right)
+{
+	return mat4(
+		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
+		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0)),
+		col4<T>(T(0), T(0), -T(1), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), T(0), T(1))
 	);
 }
 
@@ -326,7 +359,28 @@ inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float 
 {
 	return mat4(
 		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
-		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0) ),
+		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0)),
+#if defined(GEOMETRY_RIGHT_HANDED)
+#if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
+		col4<T>(T(0), T(0), -T(1) / (farZ - nearZ), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -nearZ / (farZ - nearZ), T(1))
+#elif defined(GEOMETRY_CLIP_SPACE_NEGATIVE)
+		col4<T>(T(0), T(0), -T(2) / (farZ - nearZ), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
+#endif
+#elif defiend(GEOMETRY_LEFT_HANDED)
+#if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
+		col4<T>(T(0), T(0), T(1) / (farZ - nearZ), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -nearZ / (farZ - nearZ), T(1))
+#elif defined(GEOMETRY_CLIP_SPACE_NEGATIVE)
+		col4<T>(T(0), T(0), T(2) / (farZ - nearZ), T(0)),
+		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
+#endif
+#endif
+	);
+	return mat4(
+		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
+		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0)),
 		col4<T>(T(0), T(0), -T(2) / (farZ - nearZ), T(0)),
 		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
 	);
@@ -336,13 +390,21 @@ template<typename T>
 inline mat4<T> mat4<T>::lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> & up)
 {
 	vec3f forward(vec3f::normalize(vec3f(target - eye)));
+#if defined(GEOMETRY_RIGHT_HANDED)
+	vec3f right(vec3f::normalize(vec3f::cross(forward, vec3f(up))));
+	vec3f upCoordinate(vec3f::normalize(vec3f::cross(right, forward)));
+#else
 	vec3f right(vec3f::normalize(vec3f::cross(vec3f(up), forward)));
 	vec3f upCoordinate(vec3f::normalize(vec3f::cross(forward, right)));
-	// screen space
+#endif
 	return mat4f(
 		col4f(right, 0.f),
 		col4f(upCoordinate, 0.f),
+#if defined(GEOMETRY_RIGHT_HANDED)
+		col4f(-forward, 0.f),
+#elif defined(GEOMETRY_LEFT_HANDED)
 		col4f(forward, 0.f),
+#endif
 		col4f(eye, 1.f)
 	);
 }
@@ -363,6 +425,26 @@ inline float mat4<T>::det() const
 		cols[0][2] * cols[1][1] * cols[2][0] * cols[3][3] + cols[0][1] * cols[1][2] * cols[2][0] * cols[3][3] +
 		cols[0][2] * cols[1][0] * cols[2][1] * cols[3][3] - cols[0][0] * cols[1][2] * cols[2][1] * cols[3][3] -
 		cols[0][1] * cols[1][0] * cols[2][2] * cols[3][3] + cols[0][0] * cols[1][1] * cols[2][2] * cols[3][3];
+}
+
+template <typename T>
+inline point3<T> mat4<T>::multiplyPoint(const point3<T>& point) const
+{
+	return point3<T>(
+		cols[0].x * point.x + cols[1].x * point.y + cols[2].x * point.z + cols[3].x,
+		cols[0].y * point.x + cols[1].y * point.y + cols[2].y * point.z + cols[3].y,
+		cols[0].z * point.x + cols[1].z * point.y + cols[2].z * point.z + cols[3].z
+	);
+}
+
+template <typename T>
+inline vec3<T> mat4<T>::multiplyVector(const vec3<T>& point) const
+{
+	return vec3<T>(
+		cols[0].x * point.x + cols[1].x * point.y + cols[2].x * point.z,
+		cols[0].y * point.x + cols[1].y * point.y + cols[2].y * point.z,
+		cols[0].z * point.x + cols[1].z * point.y + cols[2].z * point.z
+	);
 }
 
 }

@@ -47,6 +47,19 @@ radian<T> operator*(float value, const radian<T> &rad);
 template <typename T>
 radian<T> &operator*=(radian<T> &rad, float value);
 
+template <typename T>
+T operator/(const degree<T>& lhs, const degree<T>& rhs);
+template <typename T>
+degree<T> operator/(const degree<T>& rad, float value);
+template <typename T>
+degree<T>& operator/=(degree<T>& rad, float value);
+template <typename T>
+degree<T> operator*(const degree<T>& rad, float value);
+template <typename T>
+degree<T> operator*(float value, const degree<T>& rad);
+template <typename T>
+degree<T>& operator*=(degree<T>& rad, float value);
+
 // Values
 template <typename T>
 const radian<T> pi = T(3.14159265358979323846);

@@ -121,4 +121,48 @@ radian<T> &operator*=(radian<T> &rad, float value)
 	return rad;
 }
 
+template<typename T>
+T operator/(const degree<T>& lhs, const degree<T>& rhs)
+{
+	return lhs() / rhs();
+}
+
+template <typename T>
+degree<T> operator/(const degree<T>& rad, float value)
+{
+	degree<T> out(rad);
+	out /= value;
+	return out;
+}
+
+template <typename T>
+degree<T>& operator/=(degree<T>& rad, float value)
+{
+	rad() /= value;
+	return rad;
+}
+
+template <typename T>
+degree<T> operator*(const degree<T>& rad, float value)
+{
+	degree<T> out(rad);
+	out *= value;
+	return out;
+}
+
+template <typename T>
+degree<T> operator*(float value, const degree<T>& rad)
+{
+	degree<T> out(rad);
+	out *= value;
+	return out;
+}
+
+template <typename T>
+degree<T>& operator*=(degree<T>& rad, float value)
+{
+	rad() *= value;
+	return rad;
+}
+
 }

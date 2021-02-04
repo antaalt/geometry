@@ -14,6 +14,8 @@ struct quat {
 		};
 	};
 	quat();
+	template <typename U>
+	explicit quat(U x, U y, U z, U w);
 	explicit quat(T x, T y, T z, T w);
 
 	T &operator[](size_t index);
@@ -25,6 +27,7 @@ struct quat {
 	static quat conjuguate(const quat &quaternion);
 	static quat normalize(const quat &quaternion);
 	static quat axis(const vec3<T> &axis, const radian<T> &angle);
+	static quat euler(radian<T> yaw, radian<T> pitch, radian<T> roll); // z, y, x
 
 	quat operator*(float scalar) const;
 	quat &operator*=(float scalar);

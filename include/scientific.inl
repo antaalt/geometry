@@ -61,6 +61,11 @@ inline T tan(radian<T> value)
 {
 	return std::tan(value());
 }
+template <typename T> 
+inline T cot(radian<T> value)
+{
+	return std::cos(value()) / std::sin(value());
+}
 
 template <typename T>
 inline radian<T> arccos(T value)
