@@ -8,6 +8,8 @@ template <typename T>
 struct vec2;
 template <typename T>
 struct mat4;
+template <typename T>
+struct col4;
 
 template <typename T>
 struct col3 {
@@ -21,6 +23,7 @@ struct col3 {
 	col3(T value);
 	col3(const vec2<T> &xy, T z);
 	col3(T x, T y, T z);
+	col3(const col4<T> &);
 
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
@@ -34,6 +37,7 @@ struct mat3 {
 	mat3();
 	mat3(T value);
 	mat3(col3<T> x, col3<T> y, col3<T> z);
+	mat3(const mat4<T>& mat);
 
 	col3<T> &operator[](size_t index);
 	const col3<T> &operator[](size_t index) const;
@@ -46,6 +50,11 @@ struct mat3 {
 	static mat3 rotate(radian<T> angle);
 	static mat3 scale(const vec2<T>& scale);
 	static mat3 TRS(const vec2<T>& t, radian<T> r, const vec2<T>& s);
+	static mat3 inverse(const mat3& mat);
+	static mat3 transpose(const mat3& mat);
+
+	T det() const;
+
 };
 
 template <typename T>
