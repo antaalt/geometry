@@ -12,7 +12,6 @@ struct CylindricalCoordinate {
 	CylindricalCoordinate(vec3<T> vec) : phi(arctan(vec.y / vec.x)), theta(arccos(vec.z / vec.norm())), r(vec.norm()) {}
 	
 	explicit operator vec3<T>() const;
-	explicit operator CylindricalCoordinate<T>() const;
 private:
 	radian<T> phi;
 	radian<T> theta;
