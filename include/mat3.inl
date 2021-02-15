@@ -207,6 +207,16 @@ inline mat3<T> operator*(const mat3<T>& lhs, const mat3<T> &rhs)
 }
 
 template <typename T>
+vec3<T> operator*(const mat3<T>& lhs, const vec3<T>& rhs)
+{
+	return vec3<T>(
+		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x * rhs.z,
+		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y * rhs.z,
+		lhs[0].z * rhs.x + lhs[1].z * rhs.y + lhs[2].z * rhs.z
+	);
+}
+
+template <typename T>
 vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs)
 {
 	return vec2<T>(
