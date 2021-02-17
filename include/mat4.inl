@@ -389,23 +389,34 @@ inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float 
 template<typename T>
 inline mat4<T> mat4<T>::lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> & up)
 {
-	vec3f forward(vec3f::normalize(vec3f(target - eye)));
+	vec3<T> forward(vec3<T>::normalize(vec3<T>(target - eye)));
 #if defined(GEOMETRY_RIGHT_HANDED)
-	vec3f right(vec3f::normalize(vec3f::cross(forward, vec3f(up))));
-	vec3f upCoordinate(vec3f::normalize(vec3f::cross(right, forward)));
+	vec3<T> right(vec3<T>::normalize(vec3<T>::cross(forward, vec3<T>(up))));
+	vec3<T> upCoordinate(vec3<T>::normalize(vec3<T>::cross(right, forward)));
 #else
-	vec3f right(vec3f::normalize(vec3f::cross(vec3f(up), forward)));
-	vec3f upCoordinate(vec3f::normalize(vec3f::cross(forward, right)));
+	vec3<T> right(vec3<T>::normalize(vec3<T>::cross(vec3<T>(up), forward)));
+	vec3<T> upCoordinate(vec3<T>::normalize(vec3<T>::cross(forward, right)));
 #endif
-	return mat4f(
-		col4f(right, 0.f),
-		col4f(upCoordinate, 0.f),
+	return mat4<T>(
+		col4<T>(right, T(0)),
+		col4<T>(upCoordinate, T(0)),
 #if defined(GEOMETRY_RIGHT_HANDED)
-		col4f(-forward, 0.f),
+		col4<T>(-forward, T(0)),
 #elif defined(GEOMETRY_LEFT_HANDED)
-		col4f(forward, 0.f),
+		col4<T>(forward, T(0)),
 #endif
-		col4f(eye, 1.f)
+		col4<T>(eye, T(1))
+	);
+}
+
+template<typename T>
+inline mat4<T> mat4<T>::from2D(const mat3<T>& mat)
+{
+	return mat4<T>(
+		col4<T>(mat[0][0], mat[0][1], T(0), mat[0][2]),
+		col4<T>(mat[1][0], mat[1][1], T(0), mat[1][2]),
+		col4<T>(T(0), T(0), T(1), T(0)),
+		col4<T>(mat[2][0], mat[2][1], T(0), mat[2][2])
 	);
 }
 

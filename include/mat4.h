@@ -58,6 +58,7 @@ struct mat4 {
 	static mat4 orthographic(float bottom, float top, float left, float right);
 	static mat4 orthographic(float bottom, float top, float left, float right, float nearZ, float farZ);
 	static mat4 lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> &up = norm3<T>(0, 1, 0));
+	static mat4 from2D(const mat3<T>& mat);
 
 	float det() const;
 	point3<T> multiplyPoint(const point3<T>& point) const;
