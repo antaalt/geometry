@@ -22,6 +22,13 @@ inline vec2<T>::vec2(T x, T y) : x(x), y(y)
 {
 }
 
+template <typename T>
+template <typename U>
+inline vec2<T>::vec2(U x, U y) : x(static_cast<T>(x)), y(static_cast<T>(y))
+{
+
+}
+
 template<typename T>
 template<typename U>
 inline vec2<T>::vec2(const vec2<U>& vec) : x(static_cast<T>(vec.x)), y(static_cast<T>(vec.y))

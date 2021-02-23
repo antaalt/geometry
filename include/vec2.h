@@ -22,6 +22,8 @@ struct vec2 {
 	explicit vec2(T value);
 	explicit vec2(T x, T y);
 	template <typename U>
+	explicit vec2(U x, U y);
+	template <typename U>
 	explicit vec2(const vec2<U> &vec);
 	explicit vec2(const uv2<T> &uv);
 	explicit vec2(const vec3<T> &vec);
