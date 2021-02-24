@@ -1,4 +1,4 @@
-#include "quat.h"
+#include <geo/matrix/quat.h>
 
 namespace geometry {
 

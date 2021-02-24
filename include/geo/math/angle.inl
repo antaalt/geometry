@@ -1,6 +1,6 @@
 #pragma once
 
-#include "angle.h"
+#include <geo/math/angle.h>
 
 namespace geometry {
 

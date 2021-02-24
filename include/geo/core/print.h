@@ -1,14 +1,15 @@
 #pragma once
 
-#include "color4.h"
-#include "vec2.h"
-#include "vec3.h"
-#include "point3.h"
-#include "norm3.h"
-#include "uv2.h"
-#include "mat3.h"
-#include "mat4.h"
-#include "quat.h"
+#include <geo/color/color3.h>
+#include <geo/color/color4.h>
+#include <geo/vector/vec2.h>
+#include <geo/vector/vec3.h>
+#include <geo/vector/point3.h>
+#include <geo/vector/norm3.h>
+#include <geo/vector/uv2.h>
+#include <geo/matrix/mat3.h>
+#include <geo/matrix/mat4.h>
+#include <geo/matrix/quat.h>
 
 #include <iostream>
 
@@ -48,6 +49,12 @@ template <typename T>
 inline std::ostream& operator <<(std::ostream& os, const norm3<T>& vec)
 {
 	os << "norm3(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+	return os;
+}
+template <typename T>
+inline std::ostream& operator <<(std::ostream& os, const color3<T>& vec)
+{
+	os << "color3(" << vec.r << ", " << vec.g << ", " << vec.b << ")";
 	return os;
 }
 template <typename T>

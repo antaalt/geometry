@@ -1,5 +1,6 @@
-#include "uv2.h"
-#include "vec2.h"
+#include <geo/vector/uv2.h>
+#include <geo/vector/vec2.h>
+
 
 namespace geometry {
 

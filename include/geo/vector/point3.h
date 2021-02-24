@@ -1,5 +1,5 @@
 #pragma once
-#include "scientific.h"
+#include <geo/math/scientific.h>
 
 namespace geometry {
 

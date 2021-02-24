@@ -1,4 +1,4 @@
-#include "color4.h"
+#include <geo/color/color4.h>
 
 namespace geometry {
 
@@ -21,6 +21,24 @@ inline color4<T>::color4(const color4<U>& value) :
 }
 
 template <typename T>
+inline color4<T>::color4(T r, T g, T b, T a) :
+	r(r), g(g), b(b), a(a)
+{
+}
+
+template<typename T>
+inline color4<T>::color4(const vec3<T>& vec, T a) :
+	r(vec.x), g(vec.y), b(vec.z), a(a)
+{
+}
+
+template<typename T>
+inline color4<T>::color4(const vec4<T>& vec) :
+	r(vec.x), g(vec.y), b(vec.z), a(vec.w)
+{
+}
+
+template <typename T>
 inline T & color4<T>::operator[](size_t index)
 {
 	return data[index];
@@ -35,14 +53,14 @@ inline const T & color4<T>::operator[](size_t index) const
 template<typename T>
 inline T color4<T>::luminance() const
 {
-	static const vec3f l(0.2126f, 0.7152f, 0.0722f);
-	return r * l.x + g * l.y + b * l.z;
+	static const color3<T> l(0.2126f, 0.7152f, 0.0722f);
+	return r * l.r + g * l.g + b * l.b;
 }
 
 template<typename T>
 inline T srgb2linearf(T value)
 {
-	// TODO assert float
+	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.04045))
 		return value * T(1) / T(12.92);
 	return pow<float>((value + T(0.055)) * T(1) / T(1.055), T(2.4));
@@ -51,7 +69,7 @@ inline T srgb2linearf(T value)
 template<typename T>
 inline T linear2srgbf(T value)
 {
-	// TODO assert float
+	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.0031308))
 		return T(12.92) * value;
 	return T(1.055) * pow<float>(value, T(1) / T(2.4)) - T(0.055);
@@ -77,24 +95,6 @@ inline color4<T> color4<T>::linear2srgb(const color4<T>& color)
 		linear2srgbf<T>(color.b),
 		color.a
 	);
-}
-
-template <typename T>
-inline color4<T>::color4(T r, T g, T b, T a) :
-	r(r), g(g), b(b), a(a)
-{
-}
-
-template<typename T>
-inline color4<T>::color4(const vec3<T>& vec, T a) :
-	r(vec.x), g(vec.y), b(vec.z), a(a)
-{
-}
-
-template<typename T>
-inline color4<T>::color4(const vec4<T>& vec) :
-	r(vec.x), g(vec.y), b(vec.z), a(vec.w)
-{
 }
 
 template <typename T>

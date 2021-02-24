@@ -3,7 +3,7 @@
 #include <climits>
 #include <cstddef>
 
-#include "angle.h"
+#include <geo/math/angle.h>
 
 namespace geometry {
 

@@ -1,8 +1,8 @@
-#include "mat4.h"
-#include "norm3.h"
-#include "point3.h"
-#include "vec3.h"
-#include "quat.h"
+#include <geo/matrix/mat4.h>
+#include <geo/matrix/quat.h>
+#include <geo/vector/norm3.h>
+#include <geo/vector/point3.h>
+#include <geo/vector/vec3.h>
 
 namespace geometry {
 

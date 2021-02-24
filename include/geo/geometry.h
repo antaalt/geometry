@@ -11,20 +11,20 @@
 #define GEOMETRY_CLIP_SPACE_NEGATIVE
 #endif
 
-#include "scientific.h"
-#include "sampling.h"
-#include "angle.h"
-#include "color4.h"
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "point3.h"
-#include "norm3.h"
-#include "uv2.h"
-#include "mat3.h"
-#include "mat4.h"
-#include "quat.h"
-#include "print.h"
+#include <geo/math/scientific.h>
+#include <geo/math/sampling.h>
+#include <geo/math/angle.h>
+#include <geo/color/color4.h>
+#include <geo/vector/vec2.h>
+#include <geo/vector/vec3.h>
+#include <geo/vector/vec4.h>
+#include <geo/vector/point3.h>
+#include <geo/vector/norm3.h>
+#include <geo/vector/uv2.h>
+#include <geo/matrix/mat3.h>
+#include <geo/matrix/mat4.h>
+#include <geo/matrix/quat.h>
+#include <geo/core/print.h>
 
 namespace geometry {
 
@@ -45,12 +45,13 @@ using vec2i = vec2<int32_t>;
 using vec2u = vec2<uint32_t>;
 using vec3f = vec3<float>;
 using vec3d = vec3<double>;
+using vec3i = vec3<int32_t>;
+using vec3u = vec3<uint32_t>;
 using vec4f = vec4<float>;
 using vec4d = vec4<double>;
 
-// TODO create true color3 class
-using color3f = vec3<float>;
-using color24 = vec3<uint8_t>;
+using color3f = color3<float>;
+using color24 = color3<uint8_t>;
 using color4f = color4<float>;
 using color32 = color4<uint8_t>;
 
@@ -69,16 +70,15 @@ using radianf = radian<float>;
 
 }
 
-#include "scientific.inl"
-#include "sampling.inl"
-#include "angle.inl"
-#include "color4.inl"
-#include "vec2.inl"
-#include "vec3.inl"
-#include "vec4.inl"
-#include "point3.inl"
-#include "norm3.inl"
-#include "uv2.inl"
-#include "mat3.inl"
-#include "mat4.inl"
-#include "quat.inl"
+#include <geo/math/scientific.inl>
+#include <geo/math/angle.inl>
+#include <geo/color/color4.inl>
+#include <geo/vector/vec2.inl>
+#include <geo/vector/vec3.inl>
+#include <geo/vector/vec4.inl>
+#include <geo/vector/point3.inl>
+#include <geo/vector/norm3.inl>
+#include <geo/vector/uv2.inl>
+#include <geo/matrix/mat3.inl>
+#include <geo/matrix/mat4.inl>
+#include <geo/matrix/quat.inl>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scientific.h"
+#include <geo/math/scientific.h>
 
 #include <cmath>
 #include <climits>

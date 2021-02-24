@@ -1,6 +1,6 @@
-#include "point3.h"
-#include "vec3.h"
-#include "norm3.h"
+#include <geo/vector/point3.h>
+#include <geo/vector/vec3.h>
+#include <geo/vector/norm3.h>
 
 namespace geometry {
 

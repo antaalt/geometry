@@ -1,7 +1,7 @@
-#include "vec4.h"
-#include "norm3.h"
-#include "point3.h"
-#include "vec2.h"
+#include <geo/vector/vec4.h>
+#include <geo/vector/norm3.h>
+#include <geo/vector/point3.h>
+#include <geo/vector/vec2.h>
 
 namespace geometry {
 

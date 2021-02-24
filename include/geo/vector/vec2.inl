@@ -1,9 +1,7 @@
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "uv2.h"
-#include "scientific.h"
-
+#include <geo/vector/vec2.h>
+#include <geo/vector/vec3.h>
+#include <geo/vector/vec4.h>
+#include <geo/vector/uv2.h>
 
 namespace geometry {
 

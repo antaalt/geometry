@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scientific.h"
-#include "vec3.h"
+#include <geo/math/scientific.h>
+#include <geo/vector/vec3.h>
 
 namespace geometry {
 

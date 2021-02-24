@@ -1,8 +1,7 @@
 #pragma once
 
-#include "angle.h"
-#include "vec3.h"
-#include "vec3.h"
+#include <geo/math/angle.h>
+#include <geo/vector/vec3.h>
 
 namespace geometry {
 
