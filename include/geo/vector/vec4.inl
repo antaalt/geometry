@@ -53,18 +53,21 @@ inline const T & vec4<T>::operator[](size_t index) const
 }
 
 template <typename T>
+template <typename U, typename>
 inline T vec4<T>::norm() const
 {
 	return sqrt(dot(*this, *this));
 }
 
 template <typename T>
+template <typename U, typename>
 inline T vec4<T>::dot(const vec4<T> & lhs, const vec4<T> & rhs)
 {
 	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
 }
 
 template <typename T>
+template <typename U, typename>
 inline vec4<T> vec4<T>::normalize(const vec4<T> &vec)
 {
 	return vec / vec.norm();

@@ -4,10 +4,9 @@
 #include <cstddef>
 
 #include <geo/math/angle.h>
+#include <geo/core/types.h>
 
 namespace geometry {
-
-using real_t = float;
 
 template <typename T> T lerp(T a, T b, real_t t);
 template <typename T> T (max)(T a, T b);

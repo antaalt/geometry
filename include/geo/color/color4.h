@@ -1,6 +1,8 @@
 #pragma once
 
+#include <geo/core/sfinae.h>
 #include <geo/math/scientific.h>
+#include <geo/core/types.h>
 
 namespace geometry {
 
@@ -28,10 +30,15 @@ struct color4 {
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
 
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	T luminance() const;
 
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	static color4<T> srgb2linear(const color4<T> &color);
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	static color4<T> linear2srgb(const color4<T> &color);
+
+	static color4<T> lerp(const color4<T>& a, const color4<T>& b, real_t t);
 };
 
 template <typename T>

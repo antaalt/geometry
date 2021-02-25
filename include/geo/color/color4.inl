@@ -51,6 +51,7 @@ inline const T & color4<T>::operator[](size_t index) const
 }
 
 template<typename T>
+template <typename U, typename>
 inline T color4<T>::luminance() const
 {
 	static const color3<T> l(0.2126f, 0.7152f, 0.0722f);
@@ -76,6 +77,7 @@ inline T linear2srgbf(T value)
 }
 
 template<typename T>
+template <typename U, typename>
 inline color4<T> color4<T>::srgb2linear(const color4<T>& color)
 {
 	return color4<T>(
@@ -87,6 +89,7 @@ inline color4<T> color4<T>::srgb2linear(const color4<T>& color)
 }
 
 template<typename T>
+template <typename U, typename>
 inline color4<T> color4<T>::linear2srgb(const color4<T>& color)
 {
 	return color4<T>(

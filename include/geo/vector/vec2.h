@@ -1,4 +1,6 @@
 #pragma once
+
+#include <geo/core/sfinae.h>
 #include <geo/math/scientific.h>
 
 namespace geometry {
@@ -32,9 +34,12 @@ struct vec2 {
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
 
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	T norm() const;
 
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	static T dot(const vec2 &lhs, const vec2 &rhs);
+	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec2<T> normalize(const vec2& vec);
 	static vec2<T> abs(const vec2<T>& vec);
 	static vec2<T> (min)(const vec2& lhs, const vec2& rhs);

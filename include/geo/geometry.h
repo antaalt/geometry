@@ -10,10 +10,16 @@
 #if !defined(GEOMETRY_CLIP_SPACE_NEGATIVE) || !defined(GEOMETRY_CLIP_SPACE_POSITIVE)
 #define GEOMETRY_CLIP_SPACE_NEGATIVE
 #endif
+// Precision of library
+#if !defined(GEOMETRY_SINGLE_PRECISION) || !defined(GEOMETRY_DOUBLE_PRECISION)
+#define GEOMETRY_SINGLE_PRECISION
+#endif
 
 #include <geo/math/scientific.h>
 #include <geo/math/sampling.h>
+#include <geo/math/coordinates.h>
 #include <geo/math/angle.h>
+#include <geo/math/half.h>
 #include <geo/color/color4.h>
 #include <geo/vector/vec2.h>
 #include <geo/vector/vec3.h>
@@ -71,7 +77,10 @@ using radianf = radian<float>;
 }
 
 #include <geo/math/scientific.inl>
+#include <geo/math/sampling.inl>
+#include <geo/math/coordinates.inl>
 #include <geo/math/angle.inl>
+#include <geo/math/half.inl>
 #include <geo/color/color4.inl>
 #include <geo/vector/vec2.inl>
 #include <geo/vector/vec3.inl>

@@ -78,18 +78,21 @@ inline const T & vec3<T>::operator[](size_t index) const
 }
 
 template <typename T>
+template <typename U, typename>
 inline T vec3<T>::norm() const
 {
 	return sqrt(dot(*this, *this));
 }
 
 template <typename T>
+template <typename U, typename>
 inline T vec3<T>::dot(const vec3<T> & lhs, const vec3<T> & rhs)
 {
 	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 }
 
 template <typename T>
+template <typename U, typename>
 inline vec3<T> vec3<T>::cross(const vec3<T> & lhs, const vec3<T> & rhs)
 {
 	return vec3<T>(
@@ -100,6 +103,7 @@ inline vec3<T> vec3<T>::cross(const vec3<T> & lhs, const vec3<T> & rhs)
 }
 
 template <typename T>
+template <typename U, typename>
 inline vec3<T> vec3<T>::normalize(const vec3<T> &vec)
 {
 	return vec / vec.norm();

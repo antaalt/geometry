@@ -1,5 +1,6 @@
 #pragma once
 
+#include <geo/math/half.h>
 #include <geo/color/color3.h>
 #include <geo/color/color4.h>
 #include <geo/vector/vec2.h>
@@ -14,6 +15,12 @@
 #include <iostream>
 
 namespace geometry {
+
+inline std::ostream& operator <<(std::ostream& os, const half& half)
+{
+	os << static_cast<float>(half);
+	return os;
+}
 
 template <typename T>
 inline std::ostream& operator <<(std::ostream& os, const uv2<T>& vec)

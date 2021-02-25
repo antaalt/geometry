@@ -37,12 +37,6 @@ inline T clamp(T value, T min, T max)
 	return value;
 }
 
-template <typename T>
-inline T saturate(T value)
-{
-	return clamp<T>(value, 0.f, 1.f);
-}
-
 // Trigonometric functions
 template <typename T>
 inline T cos(radian<T> value)
@@ -131,6 +125,7 @@ inline T ceil(T value)
 {
 	return std::ceil(value);
 }
+
 template <typename T>
 inline T floor(T value)
 {
@@ -147,7 +142,10 @@ inline T trunc(T value)
 template <typename T>
 inline T abs(T value)
 {
-	return (value < T(0)) ? -value : value;
+	if constexpr (std::is_signed<T>::value)
+		return (value < T(0)) ? -value : value;
+	else
+		return value;
 }
 
 // Macro
