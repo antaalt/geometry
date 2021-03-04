@@ -64,7 +64,7 @@ inline T srgb2linearf(T value)
 	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.04045))
 		return value * T(1) / T(12.92);
-	return pow<float>((value + T(0.055)) * T(1) / T(1.055), T(2.4));
+	return pow<T>((value + T(0.055)) * T(1) / T(1.055), T(2.4));
 }
 
 template<typename T>
@@ -73,7 +73,7 @@ inline T linear2srgbf(T value)
 	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.0031308))
 		return T(12.92) * value;
-	return T(1.055) * pow<float>(value, T(1) / T(2.4)) - T(0.055);
+	return T(1.055) * pow<T>(value, T(1) / T(2.4)) - T(0.055);
 }
 
 template<typename T>

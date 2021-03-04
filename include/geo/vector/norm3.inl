@@ -40,7 +40,7 @@ inline norm3<T>::norm3(const col4<T>& col) :
 }
 
 template <typename T>
-inline norm3<T>::norm3(const point3<T> & point) : 
+inline norm3<T>::norm3(const point3<T> & point) :
 	x(point.x), y(point.y), z(point.z)
 {
 }
@@ -94,7 +94,7 @@ inline bool operator!=(const norm3<T> &lhs, const norm3<T> &rhs)
 }
 
 template <typename T>
-inline norm3<T> operator*(const norm3<T> &lhs, float rhs)
+inline norm3<T> operator*(const norm3<T> &lhs, real_t rhs)
 {
 	norm3<T> out(lhs);
 	out *= rhs;
@@ -102,7 +102,7 @@ inline norm3<T> operator*(const norm3<T> &lhs, float rhs)
 }
 
 template <typename T>
-inline norm3<T> operator*(float lhs, const norm3<T> &rhs)
+inline norm3<T> operator*(real_t lhs, const norm3<T> &rhs)
 {
 	norm3<T> out(rhs);
 	out *= lhs;
@@ -110,7 +110,7 @@ inline norm3<T> operator*(float lhs, const norm3<T> &rhs)
 }
 
 template <typename T>
-inline norm3<T> & operator*=(norm3<T> & lhs, float rhs)
+inline norm3<T> & operator*=(norm3<T> & lhs, real_t rhs)
 {
 	lhs.x *= rhs;
 	lhs.y *= rhs;
@@ -119,7 +119,7 @@ inline norm3<T> & operator*=(norm3<T> & lhs, float rhs)
 }
 
 template <typename T>
-inline norm3<T> operator/(const norm3<T> &lhs, float rhs)
+inline norm3<T> operator/(const norm3<T> &lhs, real_t rhs)
 {
 	norm3<T> out(lhs);
 	out /= rhs;
@@ -127,7 +127,7 @@ inline norm3<T> operator/(const norm3<T> &lhs, float rhs)
 }
 
 template <typename T>
-inline norm3<T> & operator/=(norm3<T> & lhs, float rhs)
+inline norm3<T> & operator/=(norm3<T> & lhs, real_t rhs)
 {
 	lhs.x /= rhs;
 	lhs.y /= rhs;

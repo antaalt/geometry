@@ -29,8 +29,8 @@ struct quat {
 	static quat axis(const vec3<T> &axis, const radian<T> &angle);
 	static quat euler(radian<T> yaw, radian<T> pitch, radian<T> roll); // z, y, x
 
-	quat operator*(float scalar) const;
-	quat &operator*=(float scalar);
+	quat operator*(real_t scalar) const;
+	quat &operator*=(real_t scalar);
 
 	quat operator*(const quat &rhs) const;
 	quat &operator*=(const quat &rhs);

@@ -15,7 +15,7 @@ inline quat<T>::quat(U x, U y, U z, U w) :
 }
 
 template <typename T>
-inline quat<T>::quat(T x, T y, T z, T w) : 
+inline quat<T>::quat(T x, T y, T z, T w) :
 	x(x), y(y), z(z), w(w)
 {
 }
@@ -48,7 +48,7 @@ template <typename T>
 inline quat<T> quat<T>::conjuguate(const quat & quaternion)
 {
 	return quat(
-		-quaternion.x, 
+		-quaternion.x,
 		-quaternion.y,
 		-quaternion.z,
 		quaternion.w
@@ -97,7 +97,7 @@ inline quat<T> quat<T>::euler(radian<T> yaw, radian<T> pitch, radian<T> roll)
 }
 
 template <typename T>
-inline quat<T> quat<T>::operator*(float scalar) const
+inline quat<T> quat<T>::operator*(real_t scalar) const
 {
 	quat out(*this);
 	out *= scalar;
@@ -105,7 +105,7 @@ inline quat<T> quat<T>::operator*(float scalar) const
 }
 
 template <typename T>
-inline quat<T> & quat<T>::operator*=(float scalar)
+inline quat<T> & quat<T>::operator*=(real_t scalar)
 {
 	x *= scalar;
 	y *= scalar;

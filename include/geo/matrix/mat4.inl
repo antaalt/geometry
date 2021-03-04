@@ -94,7 +94,7 @@ inline mat4<T>::mat4(const quat<T> & quat)
 	T sqz = quat.z*quat.z;
 
 	T invs = 1 / (sqx + sqy + sqz + sqw);
-	
+
 	cols[0] = col4<T>(
 		(sqx - sqy - sqz + sqw)*invs,
 		T(2) * (quat.x*quat.y + quat.z*quat.w)*invs,
@@ -317,7 +317,7 @@ inline mat4<T> mat4<T>::transpose(const mat4& mat)
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::perspective(const radian<T> &fovY, float ratio, float zNear, float zFar)
+inline mat4<T> mat4<T>::perspective(const radian<T> &fovY, real_t ratio, real_t zNear, real_t zFar)
 {
 	const T f = T(1) / tan(fovY / T(2));
 	return mat4(
@@ -344,7 +344,7 @@ inline mat4<T> mat4<T>::perspective(const radian<T> &fovY, float ratio, float zN
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float right)
+inline mat4<T> mat4<T>::orthographic(real_t bottom, real_t top, real_t left, real_t right)
 {
 	return mat4(
 		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
@@ -355,7 +355,7 @@ inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float 
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::orthographic(float bottom, float top, float left, float right, float nearZ, float farZ)
+inline mat4<T> mat4<T>::orthographic(real_t bottom, real_t top, real_t left, real_t right, real_t nearZ, real_t farZ)
 {
 	return mat4(
 		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
@@ -421,7 +421,7 @@ inline mat4<T> mat4<T>::from2D(const mat3<T>& mat)
 }
 
 template <typename T>
-inline float mat4<T>::det() const
+inline T mat4<T>::det() const
 {
 	return
 		cols[0][3] * cols[1][2] * cols[2][1] * cols[3][0] - cols[0][2] * cols[1][3] * cols[2][1] * cols[3][0] -

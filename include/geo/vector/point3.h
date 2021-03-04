@@ -41,16 +41,16 @@ template <typename T>
 bool operator!=(const point3<T> &lhs, const point3<T> &rhs);
 
 template <typename T>
-point3<T> operator*(const point3<T> &lhs, float rhs);
+point3<T> operator*(const point3<T> &lhs, real_t rhs);
 template <typename T>
-point3<T> operator*(float lhs, const point3<T> &rhs);
+point3<T> operator*(real_t lhs, const point3<T> &rhs);
 template <typename T>
-point3<T> &operator*=(point3<T> &lhs, float rhs);
+point3<T> &operator*=(point3<T> &lhs, real_t rhs);
 
 template <typename T>
-point3<T> operator/(const point3<T> &lhs, float rhs);
+point3<T> operator/(const point3<T> &lhs, real_t rhs);
 template <typename T>
-point3<T> &operator/=(point3<T> &lhs, float rhs);
+point3<T> &operator/=(point3<T> &lhs, real_t rhs);
 
 template <typename T>
 point3<T> operator+(const point3<T>& lhs, const vec3<T>& rhs);

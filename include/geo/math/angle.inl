@@ -84,7 +84,7 @@ T operator/(const radian<T>& lhs, const radian<T>& rhs)
 }
 
 template <typename T>
-radian<T> operator/(const radian<T> &rad, float value)
+radian<T> operator/(const radian<T> &rad, real_t value)
 {
 	radian<T> out(rad);
 	out /= value;
@@ -92,14 +92,14 @@ radian<T> operator/(const radian<T> &rad, float value)
 }
 
 template <typename T>
-radian<T> &operator/=(radian<T> &rad, float value)
+radian<T> &operator/=(radian<T> &rad, real_t value)
 {
 	rad() /= value;
 	return rad;
 }
 
 template <typename T>
-radian<T> operator*(const radian<T> &rad, float value)
+radian<T> operator*(const radian<T> &rad, real_t value)
 {
 	radian<T> out(rad);
 	out *= value;
@@ -107,7 +107,7 @@ radian<T> operator*(const radian<T> &rad, float value)
 }
 
 template <typename T>
-radian<T> operator*(float value, const radian<T> &rad)
+radian<T> operator*(real_t value, const radian<T> &rad)
 {
 	radian<T> out(rad);
 	out *= value;
@@ -115,7 +115,7 @@ radian<T> operator*(float value, const radian<T> &rad)
 }
 
 template <typename T>
-radian<T> &operator*=(radian<T> &rad, float value)
+radian<T> &operator*=(radian<T> &rad, real_t value)
 {
 	rad() *= value;
 	return rad;
@@ -128,7 +128,7 @@ T operator/(const degree<T>& lhs, const degree<T>& rhs)
 }
 
 template <typename T>
-degree<T> operator/(const degree<T>& rad, float value)
+degree<T> operator/(const degree<T>& rad, real_t value)
 {
 	degree<T> out(rad);
 	out /= value;
@@ -136,14 +136,14 @@ degree<T> operator/(const degree<T>& rad, float value)
 }
 
 template <typename T>
-degree<T>& operator/=(degree<T>& rad, float value)
+degree<T>& operator/=(degree<T>& rad, real_t value)
 {
 	rad() /= value;
 	return rad;
 }
 
 template <typename T>
-degree<T> operator*(const degree<T>& rad, float value)
+degree<T> operator*(const degree<T>& rad, real_t value)
 {
 	degree<T> out(rad);
 	out *= value;
@@ -151,7 +151,7 @@ degree<T> operator*(const degree<T>& rad, float value)
 }
 
 template <typename T>
-degree<T> operator*(float value, const degree<T>& rad)
+degree<T> operator*(real_t value, const degree<T>& rad)
 {
 	degree<T> out(rad);
 	out *= value;
@@ -159,7 +159,7 @@ degree<T> operator*(float value, const degree<T>& rad)
 }
 
 template <typename T>
-degree<T>& operator*=(degree<T>& rad, float value)
+degree<T>& operator*=(degree<T>& rad, real_t value)
 {
 	rad() *= value;
 	return rad;

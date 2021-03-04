@@ -54,13 +54,13 @@ struct mat4 {
 	static mat4 TRS(const vec3<T> & t, const quat<T> & r, const vec3<T> & s);
 	static mat4 inverse(const mat4 &mat);
 	static mat4 transpose(const mat4& mat);
-	static mat4 perspective(const radian<T> &fovY, float ratio, float nearZ, float farZ);
-	static mat4 orthographic(float bottom, float top, float left, float right);
-	static mat4 orthographic(float bottom, float top, float left, float right, float nearZ, float farZ);
+	static mat4 perspective(const radian<T> &fovY, real_t ratio, real_t nearZ, real_t farZ);
+	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right);
+	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right, real_t nearZ, real_t farZ);
 	static mat4 lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> &up = norm3<T>(0, 1, 0));
 	static mat4 from2D(const mat3<T>& mat);
 
-	float det() const;
+	T det() const;
 	point3<T> multiplyPoint(const point3<T>& point) const;
 	vec3<T> multiplyVector(const vec3<T>& vector) const;
 };

@@ -46,16 +46,16 @@ template <typename T>
 bool operator!=(const norm3<T> &lhs, const norm3<T> &rhs);
 
 template <typename T>
-norm3<T> operator*(const norm3<T> &lhs, float rhs);
+norm3<T> operator*(const norm3<T> &lhs, real_t rhs);
 template <typename T>
-norm3<T> operator*(float lhs, const norm3<T> &rhs);
+norm3<T> operator*(real_t lhs, const norm3<T> &rhs);
 template <typename T>
-norm3<T> &operator*=(norm3<T> &lhs, float rhs);
+norm3<T> &operator*=(norm3<T> &lhs, real_t rhs);
 
 template <typename T>
-norm3<T> operator/(const norm3<T> &lhs, float rhs);
+norm3<T> operator/(const norm3<T> &lhs, real_t rhs);
 template <typename T>
-norm3<T> &operator/=(norm3<T> &lhs, float rhs);
+norm3<T> &operator/=(norm3<T> &lhs, real_t rhs);
 
 template <typename T>
 norm3<T> operator+(const norm3<T> &lhs, const norm3<T> &rhs);
