@@ -48,7 +48,9 @@ struct vec3 {
 	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec3 normalize(const vec3 &vec);
 	template <typename U = T, typename = IsFloatingPoint<U>>
-	static T dot(const vec3 & lhs, const vec3 & rhs);
+	static T dot(const vec3& lhs, const vec3& rhs);
+	template <typename U = T, typename = IsFloatingPoint<U>>
+	static T dot(const vec3& lhs, const norm3<T>& rhs);
 	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec3 cross(const vec3 & lhs, const vec3 & rhs);
 };

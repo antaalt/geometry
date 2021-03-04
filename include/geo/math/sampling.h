@@ -9,19 +9,19 @@ namespace geometry {
 template <typename T>
 vec2<T> reflect(const vec2<T>& wi, const vec2<T>& normal)
 {
-	return wi - 2.f * vec2<T>::dot(wi, normal) * normal;
+	return wi - 2.f * vec2<T>::dot(wi, normal) * vec3<T>(normal);
 }
 
 template <typename T>
 vec3<T> reflect(const vec3<T> &wi, const norm3<T> &normal)
 {
-	return wi - 2.f * vec3<T>::dot(wi, normal) * normal;
+	return wi - 2.f * vec3<T>::dot(wi, normal) * vec3<T>(normal);
 }
 
 template <typename T>
 bool refract(vec3<T> &wo, const vec3<T> &wi, const norm3<T> &normal, float eta)
 {
-	float NdotV = vec3<T>::dot(wi, vec3<T>(normal));
+	float NdotV = vec3<T>::dot(wi, normal);
 	float k = 1.f - eta * eta * (1.f - NdotV * NdotV);
 	if (k < 0.f)
 		return true;
@@ -37,8 +37,7 @@ namespace sample {
 template <typename T>
 vec3<T> unitHemisphere(T r1, T r2)
 {
-	polar<T> p(2.0 * pi<T> * r2, sqrt(r1));
-	return vec3<T>(vec2<T>(p), sqrt(1.f - r1));
+	return vec3<T>(polar<T>(2.0 * pi<T> *r2, sqrt(r1)).cartesian(), sqrt(1.f - r1));
 }
 
 template <typename T>

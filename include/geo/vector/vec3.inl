@@ -93,6 +93,13 @@ inline T vec3<T>::dot(const vec3<T> & lhs, const vec3<T> & rhs)
 
 template <typename T>
 template <typename U, typename>
+inline T vec3<T>::dot(const vec3<T>& lhs, const norm3<T>& rhs)
+{
+	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+}
+
+template <typename T>
+template <typename U, typename>
 inline vec3<T> vec3<T>::cross(const vec3<T> & lhs, const vec3<T> & rhs)
 {
 	return vec3<T>(

@@ -114,7 +114,7 @@ inline point3<T> & operator/=(point3<T> & lhs, float rhs)
 }
 
 template <typename T>
-inline point3<T> operator+(const point3<T> &lhs, const point3<T> &rhs)
+inline point3<T> operator+(const point3<T> &lhs, const vec3<T> &rhs)
 {
 	point3<T> out(lhs);
 	out += rhs;
@@ -122,7 +122,7 @@ inline point3<T> operator+(const point3<T> &lhs, const point3<T> &rhs)
 }
 
 template <typename T>
-inline point3<T> &operator+=(point3<T> &lhs, const point3<T> &rhs)
+inline point3<T> &operator+=(point3<T> &lhs, const vec3<T> &rhs)
 {
 	lhs.x += rhs.x; 
 	lhs.y += rhs.y; 
@@ -131,7 +131,7 @@ inline point3<T> &operator+=(point3<T> &lhs, const point3<T> &rhs)
 }
 
 template <typename T>
-inline point3<T> operator-(const point3<T> &lhs, const point3<T> &rhs)
+inline point3<T> operator-(const point3<T>& lhs, const vec3<T>& rhs)
 {
 	point3<T> out(lhs);
 	out -= rhs;
@@ -139,12 +139,22 @@ inline point3<T> operator-(const point3<T> &lhs, const point3<T> &rhs)
 }
 
 template <typename T>
-inline point3<T> &operator-=(point3<T> &lhs, const point3<T> &rhs)
+inline point3<T>& operator-=(point3<T>& lhs, const vec3<T>& rhs)
 {
-	lhs.x -= rhs.x; 
+	lhs.x -= rhs.x;
 	lhs.y -= rhs.y;
-	lhs.z -= rhs.z; 
+	lhs.z -= rhs.z;
 	return lhs;
+}
+
+template <typename T>
+inline vec3<T> operator-(const point3<T> &lhs, const point3<T> &rhs)
+{
+	return vec3<T>(
+		lhs.x - rhs.x,
+		lhs.y - rhs.y,
+		lhs.z - rhs.z
+	);
 }
 
 template <typename T>

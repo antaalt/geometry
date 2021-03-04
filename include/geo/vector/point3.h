@@ -53,14 +53,17 @@ template <typename T>
 point3<T> &operator/=(point3<T> &lhs, float rhs);
 
 template <typename T>
-point3<T> operator+(const point3<T> &lhs, const point3<T> &rhs);
+point3<T> operator+(const point3<T>& lhs, const vec3<T>& rhs);
 template <typename T>
-point3<T> &operator+=(point3<T> &lhs, const point3<T> &rhs);
+point3<T> &operator+=(point3<T>& lhs, const vec3<T>& rhs);
 
 template <typename T>
-point3<T> operator-(const point3<T> &lhs, const point3<T> &rhs);
+point3<T> operator-(const point3<T>& lhs, const vec3<T>& rhs);
 template <typename T>
-point3<T> &operator-=(point3<T> &lhs, const point3<T> &rhs);
+point3<T> &operator-=(point3<T>& lhs, const vec3<T>& rhs);
+
+template <typename T>
+vec3<T> operator-(const point3<T>& lhs, const point3<T>& rhs);
 
 template <typename T>
 point3<T> operator-(const point3<T> &vec);
