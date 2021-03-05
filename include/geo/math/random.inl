@@ -23,7 +23,7 @@ inline T random(T range) {
 
 template <typename T>
 inline T random(T start, T end) {
-	static thread_local std::mt19937 g(std::chrono::system_clock::now().time_since_epoch().count());
+	static thread_local std::mt19937 g((std::mt19937::result_type)std::chrono::system_clock::now().time_since_epoch().count());
 	if constexpr (std::is_floating_point<T>::value)
 	{
 		std::uniform_real_distribution<T> d(start, end);
