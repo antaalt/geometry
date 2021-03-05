@@ -228,6 +228,12 @@ inline mat4<T> mat4<T>::rotate(const vec3<T> &axis, radian<T> angle)
 }
 
 template <typename T>
+inline mat4<T> mat4<T>::rotate(const quat<T>& quat)
+{
+	return mat4<T>(quat);
+}
+
+template <typename T>
 inline mat4<T> mat4<T>::translate(const vec3<T> &translation)
 {
 	return mat4<T>(
@@ -252,7 +258,7 @@ inline mat4<T> mat4<T>::scale(const vec3<T> &scale)
 template <typename T>
 inline mat4<T> mat4<T>::TRS(const vec3<T> & t, const quat<T> & r, const vec3<T> & s)
 {
-	return mat4<T>::translate(t) * mat4(r) * mat4<T>::scale(s);
+	return translate(t) * rotate(r) * scale(s);
 }
 
 template <typename T>

@@ -140,7 +140,7 @@ inline mat3<T> mat3<T>::scale(const vec2<T>& scale)
 template <typename T>
 inline mat3<T> mat3<T>::TRS(const vec2<T>& t, radian<T> r, const vec2<T>& s)
 {
-	return scale(s) * rotate(r) * translate(t);
+	return translate(t) * rotate(r) * scale(s);
 }
 
 template <typename T>
