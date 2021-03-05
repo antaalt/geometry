@@ -16,25 +16,19 @@ inline T lerp(T a, T b, real_t t)
 template <typename T>
 inline T (max)(T a, T b)
 {
-	if (a > b) return a;
-	return b;
+	return (a > b) ? a : b;
 }
 
 template <typename T>
 inline T (min)(T a, T b)
 {
-	if (a < b) return a;
-	return b;
+	return (a < b) ? a : b;
 }
 
 template <typename T>
 inline T clamp(T value, T min, T max)
 {
-	if (value > max)
-		return max;
-	if (value < min)
-		return min;
-	return value;
+	return geometry::min<T>(geometry::max<T>(value, min), max);
 }
 
 // Trigonometric functions

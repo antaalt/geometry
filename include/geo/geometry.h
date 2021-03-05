@@ -20,6 +20,7 @@
 #include <geo/math/coordinates.h>
 #include <geo/math/angle.h>
 #include <geo/math/half.h>
+#include <geo/math/random.h>
 #include <geo/color/color4.h>
 #include <geo/vector/vec2.h>
 #include <geo/vector/vec3.h>
@@ -81,6 +82,7 @@ using radianf = radian<float>;
 #include <geo/math/coordinates.inl>
 #include <geo/math/angle.inl>
 #include <geo/math/half.inl>
+#include <geo/math/random.inl>
 #include <geo/color/color4.inl>
 #include <geo/vector/vec2.inl>
 #include <geo/vector/vec3.inl>
