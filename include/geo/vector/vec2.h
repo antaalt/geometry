@@ -12,7 +12,7 @@ struct vec4;
 template <typename T>
 struct uv2;
 
-template <typename T>
+template <typename T = real_t>
 struct vec2 {
 	union {
 		T data[2];

@@ -5,7 +5,7 @@
 
 namespace geometry {
 
-template <typename T>
+template <typename T = real_t>
 struct quat {
 	union {
 		T data[4];

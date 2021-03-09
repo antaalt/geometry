@@ -11,7 +11,7 @@ struct mat4;
 template <typename T>
 struct col4;
 
-template <typename T>
+template <typename T = real_t>
 struct col3 {
 	union {
 		T data[3];
@@ -29,7 +29,7 @@ struct col3 {
 	const T &operator[](size_t index) const;
 };
 
-template <typename T>
+template <typename T = real_t>
 struct mat3 {
 
 	col3<T> cols[3];

@@ -7,7 +7,7 @@ namespace geometry {
 template <typename T> struct radian;
 template <typename T> struct degree;
 
-template <typename T>
+template <typename T = real_t>
 struct degree {
 	explicit degree();
 	explicit degree(T value);
@@ -21,7 +21,7 @@ private:
 	T m_value;
 };
 
-template <typename T>
+template <typename T = real_t>
 struct radian {
 	explicit radian();
 	constexpr explicit radian(T value);

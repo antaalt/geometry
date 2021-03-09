@@ -19,7 +19,7 @@ template <typename T>
 struct vec4;
 
 
-template <typename T>
+template <typename T = real_t>
 struct vec3 {
 	union {
 		T data[3];

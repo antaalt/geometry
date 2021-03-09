@@ -12,7 +12,7 @@ struct vec3;
 template <typename T>
 struct quat;
 
-template <typename T>
+template <typename T = real_t>
 struct col4 {
 	union {
 		T data[4];
@@ -34,7 +34,7 @@ struct col4 {
 	const T &operator[](size_t index) const;
 };
 
-template <typename T>
+template <typename T = real_t>
 struct mat4 {
 
 	col4<T> cols[4];

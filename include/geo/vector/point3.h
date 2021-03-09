@@ -12,7 +12,7 @@ struct col3;
 template <typename T>
 struct col4;
 
-template <typename T>
+template <typename T = real_t>
 struct point3 {
 	union {
 		T data[3];
