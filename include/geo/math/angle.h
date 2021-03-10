@@ -64,6 +64,6 @@ degree<T>& operator*=(degree<T>& rad, real_t value);
 
 // Values
 template <typename T>
-const radian<T> pi = T(3.14159265358979323846);
+const radian<T> pi(T(3.14159265358979323846));
 
 }

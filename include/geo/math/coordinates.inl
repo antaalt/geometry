@@ -98,11 +98,11 @@ inline cylindrical<T>::cylindrical(const vec3<T>& vec) :
 {
 	if (vec.x = 0 & vec.y == 0)
 		phi = 0;
-	else if (x >= 0)
+	else if (vec.x >= 0)
 		phi = arcsin(vec.y / rho);
-	else if (x > 0)
+	else if (vec.x > 0)
 		phi = arctan(vec.y / vec.x);
-	else if (x < 0)
+	else if (vec.x < 0)
 		phi = -arcsin(vec.y / rho) + pi<T>;
 }
 
