@@ -49,13 +49,13 @@ struct mat4 {
 
 	static mat4 identity();
 	static mat4 translate(const vec3<T> &translation);
-	static mat4 rotate(const vec3<T> &axis, radian<T> angle);
+	static mat4 rotate(const vec3<T> &axis, angle<T> angle);
 	static mat4 rotate(const quat<T>& quat);
 	static mat4 scale(const vec3<T> &scale);
 	static mat4 TRS(const vec3<T> & t, const quat<T> & r, const vec3<T> & s);
 	static mat4 inverse(const mat4 &mat);
 	static mat4 transpose(const mat4& mat);
-	static mat4 perspective(const radian<T> &fovY, real_t ratio, real_t nearZ, real_t farZ);
+	static mat4 perspective(const angle<T> &fovY, real_t ratio, real_t nearZ, real_t farZ);
 	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right);
 	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right, real_t nearZ, real_t farZ);
 	static mat4 lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> &up = norm3<T>(0, 1, 0));

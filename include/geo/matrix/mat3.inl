@@ -118,7 +118,7 @@ inline mat3<T> mat3<T>::translate(const vec2<T>& translation)
 }
 
 template <typename T>
-inline mat3<T> mat3<T>::rotate(radian<T> angle)
+inline mat3<T> mat3<T>::rotate(angle<T> angle)
 {
 	return mat3(
 		col3<T>(cos(angle), -sin(angle), 0.f),
@@ -138,7 +138,7 @@ inline mat3<T> mat3<T>::scale(const vec2<T>& scale)
 }
 
 template <typename T>
-inline mat3<T> mat3<T>::TRS(const vec2<T>& t, radian<T> r, const vec2<T>& s)
+inline mat3<T> mat3<T>::TRS(const vec2<T>& t, angle<T> r, const vec2<T>& s)
 {
 	return translate(t) * rotate(r) * scale(s);
 }

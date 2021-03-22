@@ -26,8 +26,8 @@ struct quat {
 	static quat identity();
 	static quat conjuguate(const quat &quaternion);
 	static quat normalize(const quat &quaternion);
-	static quat axis(const vec3<T> &axis, const radian<T> &angle);
-	static quat euler(radian<T> yaw, radian<T> pitch, radian<T> roll); // z, y, x
+	static quat axis(const vec3<T> &axis, const angle<T> &angle);
+	static quat euler(angle<T> yaw, angle<T> pitch, angle<T> roll); // z, y, x
 
 	quat operator*(real_t scalar) const;
 	quat &operator*=(real_t scalar);

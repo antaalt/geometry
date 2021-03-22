@@ -17,14 +17,14 @@ template <typename T> T clamp(T value, T min, T max);
 // http://www.cplusplus.com/reference/cmath/
 
 // Trigonometric functions
-template <typename T> T cos(radian<T> value);
-template <typename T> T sin(radian<T> value);
-template <typename T> T tan(radian<T> value);
-template <typename T> T cot(radian<T> value);
-template <typename T> radian<T> arccos(T value);
-template <typename T> radian<T> arcsin(T value);
-template <typename T> radian<T> arctan(T value);
-template <typename T> radian<T> arctan2(T x, T y);
+template <typename T> T cos(angle<T> value);
+template <typename T> T sin(angle<T> value);
+template <typename T> T tan(angle<T> value);
+template <typename T> T cot(angle<T> value);
+template <typename T> angle<T> arccos(T value);
+template <typename T> angle<T> arcsin(T value);
+template <typename T> angle<T> arctan(T value);
+template <typename T> angle<T> arctan2(T x, T y);
 // Hyperbolic functions
 // [...]
 // Exponential and logarithmic functions

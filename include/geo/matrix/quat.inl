@@ -68,7 +68,7 @@ inline quat<T> quat<T>::normalize(const quat & quaternion)
 }
 
 template <typename T>
-inline quat<T> quat<T>::axis(const vec3<T> & axis, const radian<T> & angle)
+inline quat<T> quat<T>::axis(const vec3<T> & axis, const angle<T> & angle)
 {
 	T sinHalfAngle = sin(angle / T(2));
 	return quat(
@@ -80,7 +80,7 @@ inline quat<T> quat<T>::axis(const vec3<T> & axis, const radian<T> & angle)
 }
 
 template <typename T>
-inline quat<T> quat<T>::euler(radian<T> yaw, radian<T> pitch, radian<T> roll)
+inline quat<T> quat<T>::euler(angle<T> yaw, angle<T> pitch, angle<T> roll)
 {
 	T c1 = cos(yaw / T(2));
 	T s1 = sin(yaw / T(2));

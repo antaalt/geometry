@@ -4,66 +4,56 @@
 
 namespace geometry {
 
-template <typename T> struct radian;
-template <typename T> struct degree;
-
 template <typename T = real_t>
-struct degree {
-	explicit degree();
-	explicit degree(T value);
-	degree(const radian<T> &rad);
-	template <typename U>
-	degree(const radian<U> &rad);
+struct angle {
+	constexpr explicit angle();
+	// Create an angle with a given radian value
+	static constexpr angle radian(T value);
+	// Create an angle with a given degree value
+	static constexpr angle degree(T value);
 
-	const T &operator()() const;
-	T &operator()();
+	// Pi variable
+	static constexpr const T pi = static_cast<T>(3.141592653589793);
+
+	// Get the angle value in radian
+	constexpr T radian() const;
+	// Get the angle value in degree
+	constexpr T degree() const;
+
+	// Convert radian to degree
+	static constexpr T rad2deg(T rad);
+	// Convert degree to radian
+	static constexpr T deg2rad(T deg);
+
+	// Operator
+	constexpr angle<T> operator+(const angle<T>& rhs) const;
+	constexpr angle<T> operator-(const angle<T>& rhs) const;
+	constexpr angle<T> operator/(const angle<T>& rhs) const;
+	constexpr angle<T> operator*(const angle<T>& rhs) const;
+	constexpr angle<T>& operator+=(const angle<T>& rhs);
+	constexpr angle<T>& operator-=(const angle<T>& rhs);
+	constexpr angle<T>& operator/=(const angle<T>& rhs);
+	constexpr angle<T>& operator*=(const angle<T>& rhs);
+	constexpr angle<T> operator-() const;
+	// Scale an angle
+	constexpr angle<T> operator*(T rhs) const;
+	constexpr angle<T> operator/(T rhs) const;
+	constexpr angle<T>& operator*=(T rhs);
+	constexpr angle<T>& operator/=(T rhs);
+	// Compare an angle
+	constexpr bool operator==(const angle<T>& rhs) const;
+	constexpr bool operator!=(const angle<T>& rhs) const;
+	constexpr bool operator< (const angle<T>& rhs) const;
+	constexpr bool operator> (const angle<T>& rhs) const;
+	constexpr bool operator<=(const angle<T>& rhs) const;
+	constexpr bool operator>=(const angle<T>& rhs) const;
 private:
-	T m_value;
+	constexpr explicit angle(T value);
+private:
+	T m_angle; // angle is always stored as radian.
 };
 
-template <typename T = real_t>
-struct radian {
-	explicit radian();
-	constexpr explicit radian(T value);
-	radian(const degree<T> &deg);
-	template <typename U>
-	radian(const degree<U> &deg);
-
-	const T &operator()() const;
-	T &operator()();
-private:
-	T m_value;
-};
-
-
 template <typename T>
-T operator/(const radian<T> &lhs, const radian<T> & rhs);
-template <typename T>
-radian<T> operator/(const radian<T> &rad, real_t value);
-template <typename T>
-radian<T> &operator/=(radian<T> &rad, real_t value);
-template <typename T>
-radian<T> operator*(const radian<T> &rad, real_t value);
-template <typename T>
-radian<T> operator*(real_t value, const radian<T> &rad);
-template <typename T>
-radian<T> &operator*=(radian<T> &rad, real_t value);
-
-template <typename T>
-T operator/(const degree<T>& lhs, const degree<T>& rhs);
-template <typename T>
-degree<T> operator/(const degree<T>& rad, real_t value);
-template <typename T>
-degree<T>& operator/=(degree<T>& rad, real_t value);
-template <typename T>
-degree<T> operator*(const degree<T>& rad, real_t value);
-template <typename T>
-degree<T> operator*(real_t value, const degree<T>& rad);
-template <typename T>
-degree<T>& operator*=(degree<T>& rad, real_t value);
-
-// Values
-template <typename T>
-const radian<T> pi(T(3.14159265358979323846));
+static constexpr const angle<T> pi = angle<T>::radian(angle<T>::pi);
 
 }

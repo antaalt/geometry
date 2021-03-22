@@ -195,7 +195,7 @@ inline mat4<T> mat4<T>::identity()
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::rotate(const vec3<T> &axis, radian<T> angle)
+inline mat4<T> mat4<T>::rotate(const vec3<T> &axis, angle<T> angle)
 {
 	// NOTE: Element 0,1 is wrong in Foley and Van Dam, Pg 227!
 	T sintheta = sin(angle);
@@ -323,7 +323,7 @@ inline mat4<T> mat4<T>::transpose(const mat4& mat)
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::perspective(const radian<T> &fovY, real_t ratio, real_t zNear, real_t zFar)
+inline mat4<T> mat4<T>::perspective(const angle<T> &fovY, real_t ratio, real_t zNear, real_t zFar)
 {
 	const T f = T(1) / tan(fovY / T(2));
 	return mat4(

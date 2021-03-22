@@ -47,9 +47,9 @@ struct mat3 {
 
 	static mat3 identity();
 	static mat3 translate(const vec2<T>& translation);
-	static mat3 rotate(radian<T> angle);
+	static mat3 rotate(angle<T> angle);
 	static mat3 scale(const vec2<T>& scale);
-	static mat3 TRS(const vec2<T>& t, radian<T> r, const vec2<T>& s);
+	static mat3 TRS(const vec2<T>& t, angle<T> r, const vec2<T>& s);
 	static mat3 inverse(const mat3& mat);
 	static mat3 transpose(const mat3& mat);
 

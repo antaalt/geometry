@@ -35,7 +35,7 @@ inline polar<T>::polar(const vec2<T>& vec) :
 }
 
 template <typename T>
-inline polar<T>::polar(radian<T> theta, T r) :
+inline polar<T>::polar(angle<T> theta, T r) :
 	theta(theta),
 	r(r)
 {
@@ -56,7 +56,7 @@ inline spherical<T>::spherical()
 }
 
 template <typename T>
-inline spherical<T>::spherical(radian<T> phi, radian<T> theta, T r) :
+inline spherical<T>::spherical(angle<T> phi, angle<T> theta, T r) :
 	phi(phi),
 	theta(theta),
 	r(r)
@@ -107,7 +107,7 @@ inline cylindrical<T>::cylindrical(const vec3<T>& vec) :
 }
 
 template <typename T>
-inline cylindrical<T>::cylindrical(radian<T> phi, T rho, T z) :
+inline cylindrical<T>::cylindrical(angle<T> phi, T rho, T z) :
 	rho(rho),
 	phi(phi),
 	z(z)

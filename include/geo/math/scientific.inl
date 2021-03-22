@@ -33,50 +33,50 @@ inline T clamp(T value, T min, T max)
 
 // Trigonometric functions
 template <typename T>
-inline T cos(radian<T> value)
+inline T cos(angle<T> value)
 {
-	return std::cos(value());
+	return std::cos(value.radian());
 }
 
 template <typename T>
-inline T sin(radian<T> value)
+inline T sin(angle<T> value)
 {
-	return std::sin(value());
+	return std::sin(value.radian());
 }
 
 template <typename T>
-inline T tan(radian<T> value)
+inline T tan(angle<T> value)
 {
-	return std::tan(value());
+	return std::tan(value.radian());
 }
 template <typename T> 
-inline T cot(radian<T> value)
+inline T cot(angle<T> value)
 {
-	return std::cos(value()) / std::sin(value());
+	return std::cos(value.radian()) / std::sin(value.radian());
 }
 
 template <typename T>
-inline radian<T> arccos(T value)
+inline angle<T> arccos(T value)
 {
-	return radian<T>(std::acos(value));
+	return angle<T>::radian(std::acos(value));
 }
 
 template <typename T>
-inline radian<T> arcsin(T value)
+inline angle<T> arcsin(T value)
 {
-	return radian<T>(std::asin(value));
+	return angle<T>::radian(std::asin(value));
 }
 
 template <typename T>
-inline radian<T> arctan(T value)
+inline angle<T> arctan(T value)
 {
-	return radian<T>(std::atan(value));
+	return angle<T>::radian(std::atan(value));
 }
 
 template <typename T>
-inline radian<T> arctan2(T x, T y)
+inline angle<T> arctan2(T x, T y)
 {
-	return radian<T>(std::atan2(x, y));
+	return angle<T>::radian(std::atan2(x, y));
 }
 
 // Hyperbolic functions

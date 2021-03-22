@@ -73,8 +73,8 @@ using col4d = col4<double>;
 using mat4f = mat4<float>;
 using mat4d = mat4<double>;
 
-using degreef = degree<float>;
-using radianf = radian<float>;
+using anglef = angle<float>;
+using angled = angle<double>;
 
 }
 

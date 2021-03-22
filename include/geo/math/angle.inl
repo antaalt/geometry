@@ -5,164 +5,169 @@
 namespace geometry {
 
 template <typename T>
-inline degree<T>::degree() :
-	m_value(T(0))
+constexpr angle<T>::angle() : 
+	m_angle(0) 
 {
 }
 
 template <typename T>
-inline degree<T>::degree(T value) :
-	m_value(value)
+constexpr angle<T>::angle(T value) : 
+	m_angle(value)
 {
 }
 
 template <typename T>
-inline degree<T>::degree(const radian<T> &rad) :
-	m_value(rad() / pi<T>() * T(180))
-{
+constexpr angle<T> angle<T>::radian(T value)
+{ 
+	return angle<T>(value); 
 }
 
 template <typename T>
-template <typename U>
-inline degree<T>::degree(const radian<U> &rad) :
-	degree(radian<T>(static_cast<T>(rad.m_value)))
+constexpr angle<T> angle<T>::degree(T value)
 {
+	return angle<T>(deg2rad(value)); 
 }
 
 template <typename T>
-const T &degree<T>::operator()() const
-{
-	return m_value;
+constexpr T angle<T>::radian() const
+{ 
+	return m_angle; 
 }
 
 template <typename T>
-T &degree<T>::operator()()
-{
-	return m_value;
+constexpr T angle<T>::degree() const
+{ 
+	return rad2deg(m_angle);
 }
 
 template <typename T>
-inline radian<T>::radian() :
-	m_value(T(0))
-{
-}
-template <typename T>
-inline constexpr radian<T>::radian(T value) :
-	m_value(value)
-{
+constexpr T angle<T>::rad2deg(T rad)
+{ 
+	return rad / angle<T>::pi * static_cast<T>(180);
 }
 
 template <typename T>
-inline radian<T>::radian(const degree<T> &deg) :
-	m_value(deg() / T(180) * pi<T>())
-{
+constexpr T angle<T>::deg2rad(T deg)
+{ 
+	return deg / static_cast<T>(180) * angle<T>::pi; 
 }
 
 template <typename T>
-template <typename U>
-inline radian<T>::radian(const degree<U> &deg) :
-	radian(degree<T>(static_cast<T>(deg.m_value)))
-{
+constexpr angle<T> angle<T>::operator+(const angle<T>& rhs) const
+{ 
+	return angle<T>(m_angle + rhs.m_angle); 
 }
 
 template <typename T>
-const T &radian<T>::operator()() const
-{
-	return m_value;
+constexpr angle<T> angle<T>::operator-(const angle<T>& rhs) const
+{ 
+	return angle<T>(m_angle - rhs.m_angle); 
 }
 
 template <typename T>
-T &radian<T>::operator()()
+constexpr angle<T> angle<T>::operator/(const angle<T>& rhs) const
 {
-	return m_value;
-}
-
-template<typename T>
-T operator/(const radian<T>& lhs, const radian<T>& rhs)
-{
-	return lhs() / rhs();
+	return angle<T>(m_angle / rhs.m_angle); 
 }
 
 template <typename T>
-radian<T> operator/(const radian<T> &rad, real_t value)
+constexpr angle<T> angle<T>::operator*(const angle<T>& rhs) const
 {
-	radian<T> out(rad);
-	out /= value;
-	return out;
+	return angle<T>(m_angle * rhs.m_angle);
 }
 
 template <typename T>
-radian<T> &operator/=(radian<T> &rad, real_t value)
-{
-	rad() /= value;
-	return rad;
+constexpr angle<T>& angle<T>::operator+=(const angle<T>& rhs)
+{ 
+	m_angle += rhs.m_angle; 
+	return *this; 
 }
 
 template <typename T>
-radian<T> operator*(const radian<T> &rad, real_t value)
+constexpr angle<T>& angle<T>::operator-=(const angle<T>& rhs)
 {
-	radian<T> out(rad);
-	out *= value;
-	return out;
+	m_angle -= rhs.m_angle;
+	return *this;
 }
 
 template <typename T>
-radian<T> operator*(real_t value, const radian<T> &rad)
-{
-	radian<T> out(rad);
-	out *= value;
-	return out;
+constexpr angle<T>& angle<T>::operator/=(const angle<T>& rhs)
+{ 
+	m_angle /= rhs.m_angle; 
+	return *this; 
 }
 
 template <typename T>
-radian<T> &operator*=(radian<T> &rad, real_t value)
+constexpr angle<T>& angle<T>::operator*=(const angle<T>& rhs)
 {
-	rad() *= value;
-	return rad;
-}
-
-template<typename T>
-T operator/(const degree<T>& lhs, const degree<T>& rhs)
-{
-	return lhs() / rhs();
+	m_angle *= rhs.m_angle; 
+	return *this;
 }
 
 template <typename T>
-degree<T> operator/(const degree<T>& rad, real_t value)
-{
-	degree<T> out(rad);
-	out /= value;
-	return out;
+constexpr angle<T> angle<T>::operator-() const
+{ 
+	return angle<T>(-m_angle); 
 }
 
 template <typename T>
-degree<T>& operator/=(degree<T>& rad, real_t value)
-{
-	rad() /= value;
-	return rad;
+constexpr angle<T> angle<T>::operator*(T rhs) const
+{ 
+	return angle<T>(m_angle * rhs); 
 }
 
 template <typename T>
-degree<T> operator*(const degree<T>& rad, real_t value)
-{
-	degree<T> out(rad);
-	out *= value;
-	return out;
+constexpr angle<T> angle<T>::operator/(T rhs) const
+{ 
+	return angle<T>(m_angle / rhs);
 }
 
 template <typename T>
-degree<T> operator*(real_t value, const degree<T>& rad)
-{
-	degree<T> out(rad);
-	out *= value;
-	return out;
+constexpr angle<T>& angle<T>::operator*=(T rhs)
+{ 
+	m_angle *= rhs; return *this; 
 }
 
 template <typename T>
-degree<T>& operator*=(degree<T>& rad, real_t value)
+constexpr angle<T>& angle<T>::operator/=(T rhs)
+{ 
+	m_angle /= rhs; return *this;
+}
+
+template <typename T>
+constexpr bool angle<T>::operator==(const angle<T>& rhs) const
+{ 
+	return m_angle == rhs.m_angle;
+}
+
+template <typename T>
+constexpr bool angle<T>::operator!=(const angle<T>& rhs) const
+{ 
+	return m_angle != rhs.m_angle;
+}
+
+template <typename T>
+constexpr bool angle<T>::operator<(const angle<T>& rhs) const
+{ 
+	return m_angle < rhs.m_angle; 
+}
+
+template <typename T>
+constexpr bool angle<T>::operator>(const angle<T>& rhs) const
 {
-	rad() *= value;
-	return rad;
+	return m_angle > rhs.m_angle;
+}
+
+template <typename T>
+constexpr bool angle<T>::operator<=(const angle<T>& rhs) const
+{ 
+	return m_angle <= rhs.m_angle;
+}
+
+template <typename T>
+constexpr bool angle<T>::operator>=(const angle<T>& rhs) const
+{ 
+	return m_angle >= rhs.m_angle; 
 }
 
 }
