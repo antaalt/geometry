@@ -31,6 +31,11 @@ inline T clamp(T value, T min, T max)
 	return geometry::min<T>(geometry::max<T>(value, min), max);
 }
 
+template <typename T> 
+inline int sgn(T val) {
+	return (T(0) < val) - (val < T(0));
+}
+
 // Trigonometric functions
 template <typename T>
 inline T cos(angle<T> value)

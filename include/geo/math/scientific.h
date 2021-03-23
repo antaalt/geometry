@@ -12,6 +12,7 @@ template <typename T> T lerp(T a, T b, real_t t);
 template <typename T> T (max)(T a, T b);
 template <typename T> T (min)(T a, T b);
 template <typename T> T clamp(T value, T min, T max);
+template <typename T> int sgn(T val);
 
 // Cmath wrapper
 // http://www.cplusplus.com/reference/cmath/
