@@ -155,21 +155,13 @@ inline mat4<T> &operator*=(mat4<T>& lhs, const mat4<T> &rhs)
 template <typename T>
 inline point3<T> operator*(const mat4<T>& lhs, const point3<T> &rhs)
 {
-	return point3<T>(
-		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x * rhs.z + lhs[3].x,
-		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y * rhs.z + lhs[3].y,
-		lhs[0].z * rhs.x + lhs[1].z * rhs.y + lhs[2].z * rhs.z + lhs[3].z
-	);
+	return lhs.multiplyPoint(rhs);
 }
 
 template <typename T>
 inline vec3<T> operator*(const mat4<T>& lhs, const vec3<T> &rhs)
 {
-	return vec3<T>(
-		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x * rhs.z,
-		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y * rhs.z,
-		lhs[0].z * rhs.x + lhs[1].z * rhs.y + lhs[2].z * rhs.z
-	);
+	return lhs.multiplyVector(rhs);
 }
 
 template<typename T>
@@ -445,12 +437,24 @@ inline T mat4<T>::det() const
 }
 
 template <typename T>
-inline point3<T> mat4<T>::multiplyPoint(const point3<T>& point) const
+inline point3<T> mat4<T>::multiplyPoint3x4(const point3<T>& point) const
 {
+	// Assume w component is 1.
 	return point3<T>(
 		cols[0].x * point.x + cols[1].x * point.y + cols[2].x * point.z + cols[3].x,
 		cols[0].y * point.x + cols[1].y * point.y + cols[2].y * point.z + cols[3].y,
 		cols[0].z * point.x + cols[1].z * point.y + cols[2].z * point.z + cols[3].z
+	);
+}
+
+template <typename T>
+inline point3<T> mat4<T>::multiplyPoint(const point3<T>& point) const
+{
+	T w = cols[0].w * point.x + cols[1].w * point.y + cols[2].w * point.z + cols[3].w;
+	return point3<T>(
+		(cols[0].x * point.x + cols[1].x * point.y + cols[2].x * point.z + cols[3].x) / w,
+		(cols[0].y * point.x + cols[1].y * point.y + cols[2].y * point.z + cols[3].y) / w,
+		(cols[0].z * point.x + cols[1].z * point.y + cols[2].z * point.z + cols[3].z) / w
 	);
 }
 

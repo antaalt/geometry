@@ -62,6 +62,7 @@ struct mat4 {
 	static mat4 from2D(const mat3<T>& mat);
 
 	T det() const;
+	point3<T> multiplyPoint3x4(const point3<T>& point) const;
 	point3<T> multiplyPoint(const point3<T>& point) const;
 	vec3<T> multiplyVector(const vec3<T>& vector) const;
 };
