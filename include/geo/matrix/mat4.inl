@@ -366,7 +366,7 @@ inline mat4<T> mat4<T>::orthographic(real_t bottom, real_t top, real_t left, rea
 		col4<T>(T(0), T(0), -T(2) / (farZ - nearZ), T(0)),
 		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
 #endif
-#elif defiend(GEOMETRY_LEFT_HANDED)
+#elif defined(GEOMETRY_LEFT_HANDED)
 #if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
 		col4<T>(T(0), T(0), T(1) / (farZ - nearZ), T(0)),
 		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -nearZ / (farZ - nearZ), T(1))
