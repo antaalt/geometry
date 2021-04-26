@@ -110,28 +110,36 @@ constexpr angle<T> angle<T>::operator-() const
 	return angle<T>(-m_angle); 
 }
 
+template <typename T> 
+constexpr angle<T> operator*(const angle<T>& lhs, real_t rhs)
+{
+	return angle<T>(lhs.m_angle * rhs);
+}
+
 template <typename T>
-constexpr angle<T> angle<T>::operator*(T rhs) const
-{ 
-	return angle<T>(m_angle * rhs); 
+constexpr angle<T> operator*(real_t lhs, const angle<T>& rhs)
+{
+	return angle<T>(lhs * rhs.m_angle);
 }
 
 template <typename T>
 constexpr angle<T> angle<T>::operator/(T rhs) const
-{ 
+{
 	return angle<T>(m_angle / rhs);
 }
 
 template <typename T>
 constexpr angle<T>& angle<T>::operator*=(T rhs)
 { 
-	m_angle *= rhs; return *this; 
+	m_angle *= rhs; 
+	return *this; 
 }
 
 template <typename T>
 constexpr angle<T>& angle<T>::operator/=(T rhs)
 { 
-	m_angle /= rhs; return *this;
+	m_angle /= rhs;
+	return *this;
 }
 
 template <typename T>

@@ -36,7 +36,8 @@ struct angle {
 	constexpr angle<T>& operator*=(const angle<T>& rhs);
 	constexpr angle<T> operator-() const;
 	// Scale an angle
-	constexpr angle<T> operator*(T rhs) const;
+	template <typename U> friend constexpr angle<U> operator*(const angle<U>& lhs, real_t rhs);
+	template <typename U> friend constexpr angle<U> operator*(real_t lhs, const angle<U>& rhs);
 	constexpr angle<T> operator/(T rhs) const;
 	constexpr angle<T>& operator*=(T rhs);
 	constexpr angle<T>& operator/=(T rhs);
@@ -52,6 +53,11 @@ private:
 private:
 	T m_angle; // angle is always stored as radian.
 };
+
+// Scale an angle
+template <typename T> constexpr angle<T> operator*(const angle<T>& lhs, real_t rhs);
+template <typename T> constexpr angle<T> operator*(real_t lhs, const angle<T>& rhs);
+
 
 template <typename T>
 static constexpr const angle<T> pi = angle<T>::radian(angle<T>::pi);
