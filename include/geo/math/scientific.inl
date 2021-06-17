@@ -79,9 +79,9 @@ inline angle<T> arctan(T value)
 }
 
 template <typename T>
-inline angle<T> arctan2(T x, T y)
+inline angle<T> arctan2(T y, T x)
 {
-	return angle<T>::radian(std::atan2(x, y));
+	return angle<T>::radian(std::atan2(y, x));
 }
 
 // Hyperbolic functions

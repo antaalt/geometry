@@ -25,7 +25,7 @@ template <typename T> T cot(angle<T> value);
 template <typename T> angle<T> arccos(T value);
 template <typename T> angle<T> arcsin(T value);
 template <typename T> angle<T> arctan(T value);
-template <typename T> angle<T> arctan2(T x, T y);
+template <typename T> angle<T> arctan2(T y, T x);
 // Hyperbolic functions
 // [...]
 // Exponential and logarithmic functions
