@@ -11,6 +11,8 @@ template <typename T>
 struct vec3;
 template <typename T>
 struct quat;
+template <typename T>
+struct mat3;
 
 template <typename T = real_t>
 struct col4 {

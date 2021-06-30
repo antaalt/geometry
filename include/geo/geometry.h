@@ -21,6 +21,7 @@
 #include <geo/math/angle.h>
 #include <geo/math/half.h>
 #include <geo/math/random.h>
+#include <geo/math/frustum.h>
 #include <geo/math/aabbox.h>
 #include <geo/color/color4.h>
 #include <geo/vector/vec2.h>
@@ -84,6 +85,7 @@ using angled = angle<double>;
 #include <geo/math/angle.inl>
 #include <geo/math/half.inl>
 #include <geo/math/random.inl>
+#include <geo/math/frustum.inl>
 #include <geo/math/aabbox.inl>
 #include <geo/color/color4.inl>
 #include <geo/vector/vec2.inl>
