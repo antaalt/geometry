@@ -94,7 +94,7 @@ inline mat4<T>::mat4(const quat<T> & quat)
 	T sqy = quat.y*quat.y;
 	T sqz = quat.z*quat.z;
 
-	T invs = 1 / (sqx + sqy + sqz + sqw);
+	T invs = T(1) / (sqx + sqy + sqz + sqw);
 
 	cols[0] = col4<T>(
 		(sqx - sqy - sqz + sqw)*invs,
@@ -120,6 +120,17 @@ inline mat4<T>::mat4(const quat<T> & quat)
 		T(0),
 		T(1)
 	);
+}
+
+template <typename T>
+inline mat4<T>::mat4(const mat3<T>& matrix) :
+	cols{
+		col4<T>{ matrix[0].x, matrix[0].y, matrix[0].z, T(0) },
+		col4<T>{ matrix[1].x, matrix[1].y, matrix[1].z, T(0) },
+		col4<T>{ matrix[2].x, matrix[2].y, matrix[2].z, T(0) },
+		col4<T>{ T(0), T(0), T(0), T(1) },
+	}
+{
 }
 
 template <typename T>

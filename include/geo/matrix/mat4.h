@@ -44,7 +44,8 @@ struct mat4 {
 	mat4();
 	mat4(T value);
 	mat4(col4<T> x, col4<T> y, col4<T> z, col4<T> w);
-	mat4(const quat<T> &quat);
+	mat4(const quat<T>& quat);
+	mat4(const mat3<T>& matrix);
 
 	col4<T> &operator[](size_t index);
 	const col4<T> &operator[](size_t index) const;
