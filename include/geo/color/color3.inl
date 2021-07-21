@@ -53,7 +53,7 @@ inline T color3<T>::luminance() const
 }
 
 template<typename T>
-inline T srgb2linearf(T value)
+inline T srgb2linear3f(T value)
 {
 	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.04045))
@@ -62,7 +62,7 @@ inline T srgb2linearf(T value)
 }
 
 template<typename T>
-inline T linear2srgbf(T value)
+inline T linear2srgb3f(T value)
 {
 	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.0031308))
@@ -75,9 +75,9 @@ template <typename U, typename>
 inline color3<T> color3<T>::srgb2linear(const color3<T>& color)
 {
 	return color3<T>(
-		srgb2linearf<T>(color.r),
-		srgb2linearf<T>(color.g),
-		srgb2linearf<T>(color.b)
+		srgb2linear3f<T>(color.r),
+		srgb2linear3f<T>(color.g),
+		srgb2linear3f<T>(color.b)
 	);
 }
 
@@ -86,9 +86,9 @@ template <typename U, typename>
 inline color3<T> color3<T>::linear2srgb(const color3<T>& color)
 {
 	return color3<T>(
-		linear2srgbf<T>(color.r),
-		linear2srgbf<T>(color.g),
-		linear2srgbf<T>(color.b)
+		linear2srgb3f<T>(color.r),
+		linear2srgb3f<T>(color.g),
+		linear2srgb3f<T>(color.b)
 	);
 }
 

@@ -87,6 +87,7 @@ using angled = angle<double>;
 #include <geo/math/random.inl>
 #include <geo/math/frustum.inl>
 #include <geo/math/aabbox.inl>
+#include <geo/color/color3.inl>
 #include <geo/color/color4.inl>
 #include <geo/vector/vec2.inl>
 #include <geo/vector/vec3.inl>
