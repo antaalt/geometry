@@ -105,4 +105,23 @@ bool operator!=(const aabbox<T>& lhs, const aabbox<T>& rhs)
 	return lhs.min != rhs.min || lhs.max != rhs.max;
 }
 
+template<typename T>
+aabbox<T> operator*(const mat4<T>& transform, const aabbox<T>& bbox)
+{
+	point3<T> points[8] = {
+		point3<T>(bbox.min.x, bbox.min.y, bbox.min.z),
+		point3<T>(bbox.min.x, bbox.max.y, bbox.min.z),
+		point3<T>(bbox.min.x, bbox.min.y, bbox.max.z),
+		point3<T>(bbox.min.x, bbox.max.y, bbox.max.z),
+		point3<T>(bbox.max.x, bbox.min.y, bbox.min.z),
+		point3<T>(bbox.max.x, bbox.max.y, bbox.min.z),
+		point3<T>(bbox.max.x, bbox.min.y, bbox.max.z),
+		point3<T>(bbox.max.x, bbox.max.y, bbox.max.z),
+	};
+	aabbox out;
+	for (const point3<T>& point : points)
+		out.include(transform.multiplyPoint(point));
+	return out;
+}
+
 };

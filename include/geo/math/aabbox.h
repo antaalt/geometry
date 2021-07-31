@@ -45,4 +45,7 @@ bool operator==(const aabbox<T>& lhs, const aabbox<T>& rhs);
 template <typename T>
 bool operator!=(const aabbox<T>& lhs, const aabbox<T>& rhs);
 
+template <typename T>
+aabbox<T> operator*(const mat4<T>& transform, const aabbox<T>& bbox);
+
 };
