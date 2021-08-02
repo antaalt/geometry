@@ -1,6 +1,8 @@
 #pragma once
 
 #include <geo/matrix/mat4.h>
+#include <geo/vector/vec4.h>
+#include <geo/math/aabbox.h>
 
 namespace geometry {
 
@@ -9,13 +11,18 @@ struct frustum
 {
 	point3<T> corners[8];
 
+	struct planes {
+		vec4<T> planes[6]; // left, right, top, bottom, near, far
+
+		bool intersect(const aabbox<T>& bound) const;
+	};
+
+	static planes extract(const mat4<T>& projection);
+
 	static frustum<T> fromProjection(const mat4<T>& projection);
 	static frustum<T> fromInverseProjection(const mat4<T>& inverseProjection);
 
 	point3<T> center() const;
-
-	point3<T>* data() { return m_corners; }
-	const point3<T>* data() const { return m_corners; }
 
 	bool operator==(const frustum<T>& rhs) const;
 	bool operator!=(const frustum<T>& rhs) const;

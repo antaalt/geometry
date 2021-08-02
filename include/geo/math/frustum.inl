@@ -2,6 +2,67 @@
 
 namespace geometry {
 
+template<typename T>
+inline bool frustum<T>::planes::intersect(const aabbox<T>& bound) const
+{
+	// https://www.iquilezles.org/www/articles/frustumcorrect/frustumcorrect.htm
+	for (int i = 0; i < 6; i++)
+	{
+		// Check the box outside or inside of frustum
+		int out = 0;
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.min.x, bound.min.y, bound.min.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.max.x, bound.min.y, bound.min.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.min.x, bound.max.y, bound.min.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.max.x, bound.max.y, bound.min.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.min.x, bound.min.y, bound.max.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.max.x, bound.min.y, bound.max.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.min.x, bound.max.y, bound.max.z, 1.0)) < 0.0) ? 1 : 0);
+		out += ((vec4<T>::dot(planes[i], vec4<T>(bound.max.x, bound.max.y, bound.max.z, 1.0)) < 0.0) ? 1 : 0);
+		if (out == 8) return false;
+	}
+	return true;
+}
+
+template<typename T>
+inline typename frustum<T>::planes frustum<T>::extract(const mat4<T>& projection)
+{
+	planes p;
+	// left
+	p.planes[0].x = projection[3][0] - projection[0][0];
+	p.planes[0].y = projection[3][1] - projection[0][1];
+	p.planes[0].z = projection[3][2] - projection[0][2];
+	p.planes[0].w = projection[3][3] - projection[0][3];
+	// right
+	p.planes[1].x = projection[3][0] + projection[0][0];
+	p.planes[1].y = projection[3][1] + projection[0][1];
+	p.planes[1].z = projection[3][2] + projection[0][2];
+	p.planes[1].w = projection[3][3] + projection[0][3];
+	// bottom
+	p.planes[2].x = projection[3][0] + projection[1][0];
+	p.planes[2].y = projection[3][1] + projection[1][1];
+	p.planes[2].z = projection[3][2] + projection[1][2];
+	p.planes[2].w = projection[3][3] + projection[1][3];
+	// top
+	p.planes[3].x = projection[3][0] - projection[1][0];
+	p.planes[3].y = projection[3][1] - projection[1][1];
+	p.planes[3].z = projection[3][2] - projection[1][2];
+	p.planes[3].w = projection[3][3] - projection[1][3];
+	// near
+	p.planes[4].x = projection[3][0] - projection[2][0];
+	p.planes[4].y = projection[3][1] - projection[2][1];
+	p.planes[4].z = projection[3][2] - projection[2][2];
+	p.planes[4].w = projection[3][3] - projection[2][3];
+	// far
+	p.planes[5].x = projection[3][0] + projection[2][0];
+	p.planes[5].y = projection[3][1] + projection[2][1];
+	p.planes[5].z = projection[3][2] + projection[2][2];
+	p.planes[5].w = projection[3][3] + projection[2][3];
+#if defined GEOMETRY_LEFT_HANDED
+#error "not supported" // TODO handle positive z asswell
+#endif
+	return p;
+}
+
 template <typename T>
 inline frustum<T> frustum<T>::fromProjection(const mat4<T>& projection)
 {
