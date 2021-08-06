@@ -12,7 +12,7 @@ struct frustum
 	point3<T> corners[8];
 
 	struct planes {
-		vec4<T> planes[6]; // left, right, top, bottom, near, far
+		vec4<T> planes[6]; // left, right, bottom, top, near, far
 
 		bool intersect(const aabbox<T>& bound) const;
 	};
