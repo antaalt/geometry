@@ -34,6 +34,7 @@ template <typename T> T log(T value);
 template <typename T> T log10(T value);
 // Power functions
 template <typename T> T pow(T value, real_t exponent);
+template <typename T> T sqr(T value);
 template <typename T> T sqrt(T value);
 // Rounding and remainder
 template <typename T> T ceil(T value);

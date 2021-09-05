@@ -112,6 +112,12 @@ inline T pow(T value, real_t exponent)
 	return std::pow(value, exponent);
 }
 
+template<typename T>
+T sqr(T value)
+{
+	return value * value;
+}
+
 template <typename T>
 inline T sqrt(T value)
 {

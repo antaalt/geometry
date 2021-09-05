@@ -64,6 +64,13 @@ inline void aabbox<T>::include(const aabbox<T>& bbox)
 }
 
 template<typename T>
+inline void aabbox<T>::include(const point3<T>& center, T radius)
+{
+	include(center + vec3<T>(radius));
+	include(center - vec3<T>(radius));
+}
+
+template<typename T>
 inline bool aabbox<T>::contain(const point3<T>& point) const
 {
 	return (
@@ -83,6 +90,12 @@ inline bool aabbox<T>::contain(const aabbox<T>& bbox) const
 }
 
 template<typename T>
+inline bool aabbox<T>::contain(const point3<T>& center, T radius) const
+{
+	return contain(center + vec3<T>(radius)) && contain(center - vec3<T>(radius));
+}
+
+template<typename T>
 inline bool aabbox<T>::overlap(const aabbox<T>& bbox) const
 {
 	return (bbox.min.x <= max.x &&
@@ -91,6 +104,23 @@ inline bool aabbox<T>::overlap(const aabbox<T>& bbox) const
 		(bbox.max.x >= min.x &&
 		bbox.max.y >= min.y &&
 		bbox.max.z >= min.z);
+}
+
+template<typename T>
+inline bool aabbox<T>::overlap(const point3<T>& center, T radius) const
+{
+	// works in n dimension
+	// Jim Arvo, Graphics Gems 2
+	float r2 = r * r;
+	float dmin = 0;
+	for (size_t i = 0; i < 3; i++)
+	{
+		if (c[i] < min[i])
+			dmin += sqr<T>(c[i] - min[i]);
+		else if (c[i] > max[i])
+			dmin += sqr<T>(c[i] - max[i]);
+	}
+	return dmin <= r2;
 }
 
 template <typename T>

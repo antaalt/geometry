@@ -29,13 +29,20 @@ struct aabbox
 	void include(const point3<T>& vec);
 	// Make the bounding box include a bounding box
 	void include(const aabbox<T>& bbox);
+	// Make the bounding box include a sphere
+	void include(const point3<T>& center, T radius);
 
 	// Check if the bounding box contain a point
 	bool contain(const point3<T>& point) const;
 	// Check if the bounding box contain a whole bounding box
 	bool contain(const aabbox<T>& bbox) const;
+	// Check if the bounding box contain a sphere
+	bool contain(const point3<T>& center, T radius) const;
+
 	// Check if the bounding box overlap a bounding box
 	bool overlap(const aabbox<T>& bbox) const;
+	// Check if the bounding box overlap a sphere
+	bool overlap(const point3<T>& center, T radius) const;
 
 	point3<T> min, max;
 };
