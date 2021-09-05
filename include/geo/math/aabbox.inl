@@ -111,14 +111,14 @@ inline bool aabbox<T>::overlap(const point3<T>& center, T radius) const
 {
 	// works in n dimension
 	// Jim Arvo, Graphics Gems 2
-	float r2 = r * r;
+	float r2 = radius * radius;
 	float dmin = 0;
 	for (size_t i = 0; i < 3; i++)
 	{
-		if (c[i] < min[i])
-			dmin += sqr<T>(c[i] - min[i]);
-		else if (c[i] > max[i])
-			dmin += sqr<T>(c[i] - max[i]);
+		if (center[i] < min[i])
+			dmin += sqr<T>(center[i] - min[i]);
+		else if (center[i] > max[i])
+			dmin += sqr<T>(center[i] - max[i]);
 	}
 	return dmin <= r2;
 }
