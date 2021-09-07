@@ -29,35 +29,35 @@ inline typename frustum<T>::planes frustum<T>::extract(const mat4<T>& projection
 	planes p;
 #if defined(GEOMETRY_LEFT_HANDED)
 	// left
-	p.planes[0].x = projection[3][0] + projection[0][0];
-	p.planes[0].y = projection[3][1] + projection[0][1];
-	p.planes[0].z = projection[3][2] + projection[0][2];
-	p.planes[0].w = projection[3][3] + projection[0][3];
+	p.planes[0].x = projection[0][3] + projection[0][0];
+	p.planes[0].y = projection[1][3] + projection[1][0];
+	p.planes[0].z = projection[2][3] + projection[2][0];
+	p.planes[0].w = projection[3][3] + projection[3][0];
 	// right
-	p.planes[1].x = projection[3][0] - projection[0][0];
-	p.planes[1].y = projection[3][1] - projection[0][1];
-	p.planes[1].z = projection[3][2] - projection[0][2];
-	p.planes[1].w = projection[3][3] - projection[0][3];
+	p.planes[1].x = projection[0][3] - projection[0][0];
+	p.planes[1].y = projection[1][3] - projection[1][0];
+	p.planes[1].z = projection[2][3] - projection[2][0];
+	p.planes[1].w = projection[3][3] - projection[3][0];
 	// bottom
-	p.planes[2].x = projection[3][0] + projection[1][0];
-	p.planes[2].y = projection[3][1] + projection[1][1];
-	p.planes[2].z = projection[3][2] + projection[1][2];
-	p.planes[2].w = projection[3][3] + projection[1][3];
+	p.planes[2].x = projection[0][3] + projection[0][1];
+	p.planes[2].y = projection[1][3] + projection[1][1];
+	p.planes[2].z = projection[2][3] + projection[2][1];
+	p.planes[2].w = projection[3][3] + projection[3][1];
 	// top
-	p.planes[3].x = projection[3][0] - projection[1][0];
-	p.planes[3].y = projection[3][1] - projection[1][1];
-	p.planes[3].z = projection[3][2] - projection[1][2];
-	p.planes[3].w = projection[3][3] - projection[1][3];
+	p.planes[3].x = projection[0][3] - projection[0][1];
+	p.planes[3].y = projection[1][3] - projection[1][1];
+	p.planes[3].z = projection[2][3] - projection[2][1];
+	p.planes[3].w = projection[3][3] - projection[3][1];
 	// near
-	p.planes[4].x = projection[2][0];
-	p.planes[4].y = projection[2][1];
+	p.planes[4].x = projection[0][2];
+	p.planes[4].y = projection[1][2];
 	p.planes[4].z = projection[2][2];
-	p.planes[4].w = projection[2][3];
+	p.planes[4].w = projection[3][2];
 	// far
-	p.planes[5].x = projection[3][0] - projection[2][0];
-	p.planes[5].y = projection[3][1] - projection[2][1];
-	p.planes[5].z = projection[3][2] - projection[2][2];
-	p.planes[5].w = projection[3][3] - projection[2][3];
+	p.planes[5].x = projection[0][3] - projection[0][2];
+	p.planes[5].y = projection[1][3] - projection[1][2];
+	p.planes[5].z = projection[2][3] - projection[2][2];
+	p.planes[5].w = projection[3][3] - projection[3][2];
 #else
 	// left
 	p.planes[0].x = projection[0][3] + projection[0][0];
