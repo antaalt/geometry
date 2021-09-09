@@ -13,7 +13,7 @@ template <typename T = real_t>
 struct aabbox
 {
 	aabbox();
-	aabbox(const point3<T>& min, const point3<T>& max);
+	explicit aabbox(const point3<T>& min, const point3<T>& max);
 
 	// Reset the bounding box and make it invalid
 	void reset();

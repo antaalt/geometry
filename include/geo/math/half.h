@@ -8,12 +8,10 @@ namespace geometry {
 struct half
 {
 	half();
-	half(float value);
-	half(double value);
-	half(const half&) = default;
+	explicit half(float value);
+	explicit half(double value);
 	half& operator=(float value);
 	half& operator=(double value);
-	~half() = default;
 
 	operator float() const;
 	operator double() const;

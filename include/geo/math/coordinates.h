@@ -23,8 +23,8 @@ private:
 template <typename T>
 struct spherical {
 	spherical();
-	spherical(const vec3<T>& vec);
-	spherical(angle<T> phi, angle<T> theta, T r);
+	explicit spherical(const vec3<T>& vec);
+	explicit spherical(angle<T> phi, angle<T> theta, T r);
 
 	vec3<T> cartesian() const;
 private:

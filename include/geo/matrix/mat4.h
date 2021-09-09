@@ -23,14 +23,14 @@ struct col4 {
 		};
 	};
 	col4();
-	col4(T value);
-	col4(T x, T y, T z, T w);
+	explicit col4(T value);
+	explicit col4(T x, T y, T z, T w);
 	template <typename U>
-	col4(U x, U y, U z, U w);
-	col4(norm3<T> vec, T w);
-	col4(vec3<T> vec, T w);
-	col4(vec4<T> vec);
-	col4(point3<T> vec, T w);
+	explicit col4(U x, U y, U z, U w);
+	explicit col4(norm3<T> vec, T w);
+	explicit col4(vec3<T> vec, T w);
+	explicit col4(vec4<T> vec);
+	explicit col4(point3<T> vec, T w);
 
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
@@ -42,10 +42,10 @@ struct mat4 {
 	col4<T> cols[4];
 
 	mat4();
-	mat4(T value);
-	mat4(col4<T> x, col4<T> y, col4<T> z, col4<T> w);
-	mat4(const quat<T>& quat);
-	mat4(const mat3<T>& matrix);
+	explicit mat4(T value);
+	explicit mat4(col4<T> x, col4<T> y, col4<T> z, col4<T> w);
+	explicit mat4(const quat<T>& quat);
+	explicit mat4(const mat3<T>& matrix);
 
 	col4<T> &operator[](size_t index);
 	const col4<T> &operator[](size_t index) const;

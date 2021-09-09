@@ -62,7 +62,7 @@ inline mat3<T>::mat3(col3<T> x, col3<T> y, col3<T> z) : cols{ x, y, z }
 
 template <typename T>
 inline mat3<T>::mat3(const mat4<T>& mat) :
-	cols{ mat[0], mat[1], mat[2] }
+	cols{ col3<T>(mat[0]), col3<T>(mat[1]), col3<T>(mat[2]) }
 {
 
 }

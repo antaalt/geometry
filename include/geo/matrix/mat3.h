@@ -20,10 +20,10 @@ struct col3 {
 		};
 	};
 	col3();
-	col3(T value);
-	col3(const vec2<T> &xy, T z);
-	col3(T x, T y, T z);
-	col3(const col4<T> &);
+	explicit col3(T value);
+	explicit col3(const vec2<T> &xy, T z);
+	explicit col3(T x, T y, T z);
+	explicit col3(const col4<T> &);
 
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
@@ -35,9 +35,9 @@ struct mat3 {
 	col3<T> cols[3];
 
 	mat3();
-	mat3(T value);
-	mat3(col3<T> x, col3<T> y, col3<T> z);
-	mat3(const mat4<T>& mat);
+	explicit mat3(T value);
+	explicit mat3(col3<T> x, col3<T> y, col3<T> z);
+	explicit mat3(const mat4<T>& mat);
 
 	col3<T> &operator[](size_t index);
 	const col3<T> &operator[](size_t index) const;
