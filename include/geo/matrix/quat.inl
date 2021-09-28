@@ -20,6 +20,53 @@ inline quat<T>::quat(T x, T y, T z, T w) :
 {
 }
 
+template<typename T>
+inline quat<T>::quat(const mat3<T>& m)
+{
+	// Converting a Rotation Matrix to a Quaternion - Mike Day, Insomniac Games
+	// This assume a pure rotation matrix (without shear and such)
+	T t;
+	if (m[2][2] < 0) 
+	{ 
+		if (m[0][0] > m[1][1]) 
+		{
+			t = T(1) + m[0][0] - m[1][1] - m[2][2];
+			x = t;
+			y = m[1][0] + m[0][1];
+			z = m[0][2] + m[2][0];
+			w = m[2][1] - m[1][2];
+		}
+		else 
+		{ 
+			t = T(1) - m[0][0] + m[1][1] - m[2][2];
+			x = m[1][0] + m[0][1];
+			y = t;
+			z = m[2][1] + m[1][2];
+			w = m[0][2] - m[2][0];
+		} 
+	}
+	else 
+	{ 
+		if (m[0][0] < -m[1][1]) 
+		{ 
+			t = T(1) - m[0][0] - m[1][1] + m[2][2];
+			x = m[0][2] + m[2][0];
+			y = m[2][1] + m[1][2];
+			z = t;
+			w = m[1][0] - m[0][1];
+		} 
+		else 
+		{ 
+			t = T(1) + m[0][0] + m[1][1] + m[2][2];
+			x = m[2][1] - m[1][2];
+			y = m[0][2] - m[2][0];
+			z = m[1][0] - m[0][1];
+			w = t;
+		} 
+	}
+	*this *= T(0.5) / sqrt(t);
+}
+
 template <typename T>
 inline T & quat<T>::operator[](size_t index)
 {

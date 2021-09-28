@@ -22,6 +22,11 @@ inline col3<T>::col3(const vec2<T>& xy, T z) : x(xy.x), y(xy.y), z(z)
 {
 }
 
+template<typename T>
+inline col3<T>::col3(const vec3<T>& vec) : x(vec.x), y(vec.y), z(vec.z)
+{
+}
+
 template <typename T>
 inline col3<T>::col3(T x, T y, T z) : x(x), y(y), z(z)
 {

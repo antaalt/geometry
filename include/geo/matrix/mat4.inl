@@ -397,7 +397,41 @@ inline mat4<T> mat4<T>::orthographic(real_t bottom, real_t top, real_t left, rea
 }
 
 template<typename T>
-inline mat4<T> mat4<T>::lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> & up)
+inline mat4<T> mat4<T>::lookAtView(const point3<T> & eye, const point3<T> & target, const norm3<T> & up)
+{
+	vec3<T> forward(vec3<T>::normalize(vec3<T>(target - eye)));
+#if defined(GEOMETRY_RIGHT_HANDED)
+	vec3<T> right(vec3<T>::normalize(vec3<T>::cross(forward, vec3<T>(up))));
+	vec3<T> upCoordinate(vec3<T>::normalize(vec3<T>::cross(right, forward)));
+#else
+	vec3<T> right(vec3<T>::normalize(vec3<T>::cross(vec3<T>(up), forward)));
+	vec3<T> upCoordinate(vec3<T>::normalize(vec3<T>::cross(forward, right)));
+#endif
+	return mat4<T>(
+#if defined(GEOMETRY_RIGHT_HANDED)
+		col4<T>(right.x, upCoordinate.x, -forward.x, T(0)),
+		col4<T>(right.y, upCoordinate.y, -forward.y, T(0)),
+		col4<T>(right.z, upCoordinate.z, -forward.z, T(0)),
+#else
+		col4<T>(right.x, upCoordinate.x, forward.x, T(0)),
+		col4<T>(right.y, upCoordinate.y, forward.y, T(0)),
+		col4<T>(right.z, upCoordinate.z, forward.z, T(0)),
+#endif
+		col4<T>(
+			-vec3<T>::dot(right, vec3<T>(eye)),
+			-vec3<T>::dot(upCoordinate, vec3<T>(eye)),
+#if defined(GEOMETRY_LEFT_HANDED)
+			-vec3<T>::dot(forward, vec3<T>(eye)),
+#else
+			vec3<T>::dot(forward, vec3<T>(eye)),
+#endif
+			T(1)
+		)
+	);
+}
+
+template<typename T>
+inline mat4<T> mat4<T>::lookAt(const point3<T>& eye, const point3<T>& target, const norm3<T>& up)
 {
 	vec3<T> forward(vec3<T>::normalize(vec3<T>(target - eye)));
 #if defined(GEOMETRY_RIGHT_HANDED)
@@ -428,6 +462,36 @@ inline mat4<T> mat4<T>::from2D(const mat3<T>& mat)
 		col4<T>(T(0), T(0), T(1), T(0)),
 		col4<T>(mat[2][0], mat[2][1], T(0), mat[2][2])
 	);
+}
+
+template<typename T>
+inline vec3<T> mat4<T>::extractScale(const mat4<T>& matrix)
+{
+	return vec3<T>(
+		vec3<T>(matrix[0]).norm(),
+		vec3<T>(matrix[1]).norm(),
+		vec3<T>(matrix[2]).norm()
+	);
+}
+
+template<typename T>
+inline vec3<T> mat4<T>::extractTranslation(const mat4<T>& matrix)
+{
+	return vec3<T>(matrix[3]);
+}
+
+template<typename T>
+inline quat<T> mat4<T>::extractRotation(const mat4<T>& matrix)
+{
+	// Does not take shear & projection into account, 
+	// but as this lib do not let us change that, it does not matter
+	vec3<T> scale = extractScale(matrix);
+	mat3<T> rotation(
+		vec3<T>(matrix[0]) / scale.x,
+		vec3<T>(matrix[1]) / scale.y,
+		vec3<T>(matrix[2]) / scale.z
+	);
+	return quat<T>(rotation);
 }
 
 template <typename T>

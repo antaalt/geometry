@@ -5,6 +5,11 @@
 
 namespace geometry {
 
+template <typename T>
+struct mat3;
+template <typename T>
+struct mat4;
+
 template <typename T = real_t>
 struct quat {
 	union {
@@ -17,6 +22,7 @@ struct quat {
 	template <typename U>
 	explicit quat(U x, U y, U z, U w);
 	explicit quat(T x, T y, T z, T w);
+	explicit quat(const mat3<T>& matrix);
 
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;

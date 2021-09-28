@@ -22,6 +22,7 @@ struct col3 {
 	col3();
 	explicit col3(T value);
 	explicit col3(const vec2<T> &xy, T z);
+	explicit col3(const vec3<T>& vec);
 	explicit col3(T x, T y, T z);
 	explicit col3(const col4<T> &);
 

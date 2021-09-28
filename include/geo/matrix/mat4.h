@@ -61,8 +61,12 @@ struct mat4 {
 	static mat4 perspective(const angle<T> &fovY, real_t ratio, real_t nearZ, real_t farZ);
 	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right);
 	static mat4 orthographic(real_t bottom, real_t top, real_t left, real_t right, real_t nearZ, real_t farZ);
-	static mat4 lookAt(const point3<T> & eye, const point3<T> & target, const norm3<T> &up = norm3<T>(0, 1, 0));
+	static mat4 lookAtView(const point3<T> & eye, const point3<T> & target, const norm3<T> &up = norm3<T>(0, 1, 0));
+	static mat4 lookAt(const point3<T>& eye, const point3<T>& target, const norm3<T>& up = norm3<T>(0, 1, 0));
 	static mat4 from2D(const mat3<T>& mat);
+	static vec3<T> extractScale(const mat4<T>& matrix);
+	static vec3<T> extractTranslation(const mat4<T>& matrix);
+	static quat<T> extractRotation(const mat4<T>& matrix);
 
 	T det() const;
 	point3<T> multiplyPoint3x4(const point3<T>& point) const;
