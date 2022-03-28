@@ -388,12 +388,6 @@ inline mat4<T> mat4<T>::orthographic(real_t bottom, real_t top, real_t left, rea
 #endif
 #endif
 	);
-	return mat4(
-		col4<T>(T(2) / (right - left), T(0), T(0), T(0)),
-		col4<T>(T(0), T(2) / (top - bottom), T(0), T(0)),
-		col4<T>(T(0), T(0), -T(2) / (farZ - nearZ), T(0)),
-		col4<T>(-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), T(1))
-	);
 }
 
 template<typename T>

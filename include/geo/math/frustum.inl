@@ -131,6 +131,18 @@ inline point3<T> frustum<T>::center() const
 	return c / static_cast<T>(8);
 }
 
+template <typename T>
+inline float frustum<T>::radius() const
+{
+	float radius = 0.f;
+	point3<T> c = center();
+	for (uint32_t i = 0; i < 8; i++) {
+		float distance = (corners[i] - c).norm();
+		radius = max(radius, distance);
+	}
+	return ceil(radius * 16.f) / 16.f;
+}
+
 template<typename T>
 inline bool frustum<T>::operator==(const frustum<T>& rhs) const
 {

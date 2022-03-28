@@ -24,6 +24,8 @@ struct frustum
 
 	point3<T> center() const;
 
+	float radius() const;
+
 	bool operator==(const frustum<T>& rhs) const;
 	bool operator!=(const frustum<T>& rhs) const;
 };
