@@ -7,8 +7,8 @@ namespace geometry {
 template<typename T>
 inline aabbox<T>::aabbox() :
 	aabbox(
-		point3<T>(std::numeric_limits<T>::max()), 
-		point3<T>(-std::numeric_limits<T>::max())
+		point3<T>((std::numeric_limits<T>::max)()),
+		point3<T>(-(std::numeric_limits<T>::max)())
 	)
 {
 }
@@ -23,8 +23,8 @@ inline aabbox<T>::aabbox(const point3<T>& min, const point3<T>& max) :
 template<typename T>
 inline void aabbox<T>::reset()
 {
-	min = point3<T>(std::numeric_limits<T>::max());
-	max = point3<T>(-std::numeric_limits<T>::max());
+	min = point3<T>((std::numeric_limits<T>::max)());
+	max = point3<T>(-(std::numeric_limits<T>::max)());
 }
 
 template<typename T>

@@ -109,7 +109,7 @@ inline T log10(T value)
 template <typename T>
 inline T pow(T value, real_t exponent)
 {
-	return std::pow(value, exponent);
+	return (T)std::pow(value, exponent);
 }
 
 template<typename T>
