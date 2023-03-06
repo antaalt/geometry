@@ -31,6 +31,7 @@ template <typename T> angle<T> arctan2(T y, T x);
 // Exponential and logarithmic functions
 template <typename T> T exp(T value);
 template <typename T> T log(T value);
+template <typename T> T log2(T value);
 template <typename T> T log10(T value);
 // Power functions
 template <typename T> T pow(T value, real_t exponent);
@@ -43,7 +44,7 @@ template <typename T> T trunc(T value);
 // Others functions
 template <typename T> T abs(T value);
 // Macro
-template <typename T> T isNan(T value);
-template <typename T> T isInf(T value);
+template <typename T> bool isNan(T value);
+template <typename T> bool isInf(T value);
 
 }

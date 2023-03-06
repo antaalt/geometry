@@ -90,26 +90,32 @@ inline angle<T> arctan2(T y, T x)
 template <typename T>
 inline T exp(T value)
 {
-	return std::exp(value);
+	return static_cast<T>(std::exp(value));
 }
 
 template <typename T>
 inline T log(T value)
 {
-	return std::log(value);
+	return static_cast<T>(std::log(value));
+}
+
+template <typename T>
+inline T log2(T value)
+{
+	return static_cast<T>(std::log2(value));
 }
 
 template <typename T>
 inline T log10(T value)
 {
-	return std::log10(value);
+	return static_cast<T>(std::log10(value));
 }
 
 // Power functions
 template <typename T>
 inline T pow(T value, real_t exponent)
 {
-	return (T)std::pow(value, exponent);
+	return static_cast<T>(std::pow(value, exponent));
 }
 
 template<typename T>
@@ -128,19 +134,19 @@ inline T sqrt(T value)
 template <typename T>
 inline T ceil(T value)
 {
-	return std::ceil(value);
+	return static_cast<T>(std::ceil(value));
 }
 
 template <typename T>
 inline T floor(T value)
 {
-	return std::floor(value);
+	return static_cast<T>(std::floor(value));
 }
 
 template <typename T>
 inline T trunc(T value)
 {
-	return std::trunc(value);
+	return static_cast<T>(std::trunc(value));
 }
 
 // Others functions
@@ -155,13 +161,13 @@ inline T abs(T value)
 
 // Macro
 template <typename T>
-inline T isNan(T value)
+inline bool isNan(T value)
 {
 	return std::isnan(value);
 }
 
 template <typename T>
-inline T isInf(T value)
+inline bool isInf(T value)
 {
 	return std::isinf(value);
 }
