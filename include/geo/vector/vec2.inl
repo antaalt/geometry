@@ -88,7 +88,7 @@ inline vec2<T> vec2<T>::abs(const vec2<T>& vec)
 }
 
 template <typename T>
-inline vec2<T> (vec2<T>::min)(const vec2<T>& lhs, const vec2<T>& rhs)
+inline vec2<T> vec2<T>::min(const vec2<T>& lhs, const vec2<T>& rhs)
 {
 	return vec2f(
 		(geometry::min)(lhs.x, rhs.x),
@@ -97,7 +97,7 @@ inline vec2<T> (vec2<T>::min)(const vec2<T>& lhs, const vec2<T>& rhs)
 }
 
 template <typename T>
-inline vec2<T>(vec2<T>::max)(const vec2<T>& lhs, const vec2<T>& rhs)
+inline vec2<T> vec2<T>::max(const vec2<T>& lhs, const vec2<T>& rhs)
 {
 	return vec2f(
 		(geometry::max)(lhs.x, rhs.x),

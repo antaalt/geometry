@@ -42,8 +42,8 @@ struct vec2 {
 	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec2<T> normalize(const vec2& vec);
 	static vec2<T> abs(const vec2<T>& vec);
-	static vec2<T> (min)(const vec2& lhs, const vec2& rhs);
-	static vec2<T> (max)(const vec2& lhs, const vec2& rhs);
+	static vec2<T> min(const vec2& lhs, const vec2& rhs);
+	static vec2<T> max(const vec2& lhs, const vec2& rhs);
 };
 
 template <typename T>
