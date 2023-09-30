@@ -26,6 +26,8 @@ struct aabbox
 	point3<T> center() const;
 
 	// Make the bounding box include a point
+	void include(real_t x, real_t y, real_t z);
+	// Make the bounding box include a point
 	void include(const point3<T>& vec);
 	// Make the bounding box include a bounding box
 	void include(const aabbox<T>& bbox);

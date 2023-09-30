@@ -46,14 +46,20 @@ inline point3<T> aabbox<T>::center() const
 }
 
 template<typename T>
+inline void aabbox<T>::include(real_t x, real_t y, real_t z)
+{
+	if (min.x > x) min.x = x;
+	if (min.y > y) min.y = y;
+	if (min.z > z) min.z = z;
+	if (max.x < x) max.x = x;
+	if (max.y < y) max.y = y;
+	if (max.z < z) max.z = z;
+}
+
+template<typename T>
 inline void aabbox<T>::include(const point3<T>& vec)
 {
-	if (min.x > vec.x) min.x = vec.x;
-	if (min.y > vec.y) min.y = vec.y;
-	if (min.z > vec.z) min.z = vec.z;
-	if (max.x < vec.x) max.x = vec.x;
-	if (max.y < vec.y) max.y = vec.y;
-	if (max.z < vec.z) max.z = vec.z;
+	include(vec.x, vec.y, vec.z);
 }
 
 template<typename T>
