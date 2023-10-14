@@ -51,6 +51,7 @@ struct mat4 {
 	const col4<T> &operator[](size_t index) const;
 
 	static mat4 identity();
+	static mat4 translate(const point3<T>& translation);
 	static mat4 translate(const vec3<T> &translation);
 	static mat4 rotate(const vec3<T> &axis, angle<T> angle);
 	static mat4 rotate(const quat<T>& quat);

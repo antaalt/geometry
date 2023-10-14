@@ -31,7 +31,8 @@ struct point3 {
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
 
-	static T distance(const point3 &lhs, const point3 &rhs);
+	static real_t distance(const point3 &lhs, const point3 &rhs);
+	static point3 lerp(const point3<T>& from, const point3<T>& to, real_t t);
 };
 
 

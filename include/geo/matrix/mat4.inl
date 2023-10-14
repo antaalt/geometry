@@ -238,6 +238,17 @@ inline mat4<T> mat4<T>::rotate(const quat<T>& quat)
 }
 
 template <typename T>
+inline mat4<T> mat4<T>::translate(const point3<T>& translation)
+{
+	return mat4<T>(
+		col4<T>(T(1), T(0), T(0), T(0)),
+		col4<T>(T(0), T(1), T(0), T(0)),
+		col4<T>(T(0), T(0), T(1), T(0)),
+		col4<T>(translation, T(1))
+	);
+}
+
+template <typename T>
 inline mat4<T> mat4<T>::translate(const vec3<T> &translation)
 {
 	return mat4<T>(

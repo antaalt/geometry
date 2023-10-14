@@ -31,7 +31,13 @@ inline T clamp(T value, T min, T max)
 	return geometry::min<T>(geometry::max<T>(value, min), max);
 }
 
-template <typename T> 
+template <typename T>
+inline T saturate(T value)
+{
+	return geometry::clamp<T>(value, T(0), T(1));
+}
+
+template <typename T>
 inline int sgn(T val) {
 	return (T(0) < val) - (val < T(0));
 }
@@ -63,13 +69,25 @@ inline T cot(angle<T> value)
 template <typename T>
 inline angle<T> arccos(T value)
 {
-	return angle<T>::radian(std::acos(value));
+	// std::acos return nan out that ranges.
+	if (value <= T(-1))
+		return geometry::pi<T>;
+	else if (value >= T(1))
+		return angle<T>::radian(0);
+	else
+		return angle<T>::radian(std::acos(value));
 }
 
 template <typename T>
 inline angle<T> arcsin(T value)
 {
-	return angle<T>::radian(std::asin(value));
+	// std::asin return nan out that ranges.
+	if (value <= T(-1))
+		return -geometry::pi<T> / T(2);
+	else if (value >= T(1))
+		return geometry::pi<T> / T(2);
+	else
+		return angle<T>::radian(std::asin(value));
 }
 
 template <typename T>
@@ -147,6 +165,12 @@ template <typename T>
 inline T trunc(T value)
 {
 	return static_cast<T>(std::trunc(value));
+}
+
+template <typename T>
+inline T frac(T value)
+{
+	return value - trunc<T>(value);
 }
 
 // Others functions

@@ -12,6 +12,7 @@ template <typename T> T lerp(T a, T b, real_t t);
 template <typename T> T (max)(T a, T b);
 template <typename T> T (min)(T a, T b);
 template <typename T> T clamp(T value, T min, T max);
+template <typename T> T saturate(T value);
 template <typename T> int sgn(T val);
 
 // Cmath wrapper
@@ -41,6 +42,7 @@ template <typename T> T sqrt(T value);
 template <typename T> T ceil(T value);
 template <typename T> T floor(T value);
 template <typename T> T trunc(T value);
+template <typename T> T frac(T value);
 // Others functions
 template <typename T> T abs(T value);
 // Macro

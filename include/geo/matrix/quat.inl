@@ -92,6 +92,19 @@ inline quat<T> quat<T>::identity()
 }
 
 template <typename T>
+inline quat<T> inverse(const quat<T>& quaternion)
+{
+	quat<T> out;
+	T n = quaternion.norm();
+	out = quaternion.onjugate();
+	out.x /= norm;
+	out.y /= norm;
+	out.z /= norm;
+	out.w /= norm;
+	return out;
+}
+
+template <typename T>
 inline quat<T> quat<T>::conjuguate(const quat & quaternion)
 {
 	return quat(
@@ -143,83 +156,165 @@ inline quat<T> quat<T>::euler(angle<T> yaw, angle<T> pitch, angle<T> roll)
 	);
 }
 
-template <typename T>
-inline quat<T> quat<T>::operator*(real_t scalar) const
+template<typename T>
+inline real_t quat<T>::dot(const quat& lhs, const quat& rhs)
 {
-	quat out(*this);
+	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
+}
+
+template<typename T>
+inline quat<T> quat<T>::slerp(const quat& from, const quat& to, real_t t)
+{
+	// Only unit quaternion are valid rotations. Avoid UB.
+	quat fromNormalized = quat::normalize(from);
+	quat toNormalized = quat::normalize(to);
+	T cosHalfTheta = quat::dot(fromNormalized, toNormalized);
+	// Follow shortest path.
+	if (cosHalfTheta < T(0))
+	{
+		toNormalized = -toNormalized;
+		cosHalfTheta = -cosHalfTheta;
+	}
+	if (cosHalfTheta > T(0.999))
+	{
+		// If the inputs are too close, simply lerp & normalize.
+		return quat::normalize(geometry::lerp(fromNormalized, toNormalized, t));
+	}
+	angle<T> halfTheta = geometry::arccos(cosHalfTheta);
+	float sinHalfTheta = geometry::sin(halfTheta);
+	return (fromNormalized * geometry::sin((real_t(1) - t) * halfTheta) + toNormalized * geometry::sin(t * halfTheta)) / sinHalfTheta;
+}
+
+
+template <typename T>
+inline bool operator==(const quat<T>& lhs, const quat<T>& rhs)
+{
+	return !operator!=(lhs, rhs);
+}
+
+template <typename T>
+inline bool operator!=(const quat<T>& lhs, const quat<T>& rhs)
+{
+	for (uint32_t i = 0; i < 4; i++)
+		if (lhs.data[i] != rhs.data[i])
+			return true;
+	return false;
+}
+
+template <typename T>
+inline quat<T> operator*(const quat<T>& lhs, real_t scalar)
+{
+	quat out(lhs);
 	out *= scalar;
 	return out;
 }
 
 template <typename T>
-inline quat<T> & quat<T>::operator*=(real_t scalar)
+inline quat<T> operator*(real_t scalar, const quat<T>& rhs)
 {
-	x *= scalar;
-	y *= scalar;
-	z *= scalar;
-	w *= scalar;
-	return *this;
+	quat out(rhs);
+	out *= scalar;
+	return out;
 }
 
 template <typename T>
-inline quat<T> quat<T>::operator*(const quat & rhs) const
+inline quat<T> & operator*=(quat<T>& lhs, real_t scalar)
 {
-	quat out(*this);
+	lhs.x *= scalar;
+	lhs.y *= scalar;
+	lhs.z *= scalar;
+	lhs.w *= scalar;
+	return lhs;
+}
+
+template <typename T>
+quat<T> operator/(const quat<T>& lhs, real_t scalar)
+{
+	quat out(lhs);
+	out /= scalar;
+	return out;
+}
+
+template <typename T>
+quat<T>& operator/=(quat<T>& lhs, real_t scalar)
+{
+	lhs.x /= scalar;
+	lhs.y /= scalar;
+	lhs.z /= scalar;
+	lhs.w /= scalar;
+	return lhs;
+}
+
+template <typename T>
+inline quat<T> operator*(const quat<T>& lhs, const quat<T>& rhs)
+{
+	quat out(lhs);
 	out *= rhs;
 	return out;
 }
 
 template <typename T>
-inline quat<T> & quat<T>::operator*=(const quat & rhs)
+inline quat<T> & operator*=(quat<T>& lhs, const quat<T>& rhs)
 {
-	x =  x * rhs.w + y * rhs.z - z * rhs.y + w * rhs.x;
-	y = -x * rhs.z + y * rhs.w + z * rhs.x + w * rhs.y;
-	z =  x * rhs.y - y * rhs.x + z * rhs.w + w * rhs.z;
-	w = -x * rhs.x - y * rhs.y - z * rhs.z + w * rhs.w;
-	return *this;
+	lhs.x =  lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y + lhs.w * rhs.x;
+	lhs.y = -lhs.x * rhs.z + lhs.y * rhs.w + lhs.z * rhs.x + lhs.w * rhs.y;
+	lhs.z =  lhs.x * rhs.y - lhs.y * rhs.x + lhs.z * rhs.w + lhs.w * rhs.z;
+	lhs.w = -lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z + lhs.w * rhs.w;
+	return lhs;
 }
 
 template <typename T>
-inline quat<T> quat<T>::operator+(const quat & rhs) const
+inline quat<T> operator+(const quat<T>& lhs, const quat<T>& rhs)
 {
-	quat out(*this);
+	quat out(lhs);
 	out += rhs;
 	return out;
 }
 
 template <typename T>
-inline quat<T> & quat<T>::operator+=(const quat & rhs)
+inline quat<T> & operator+=(quat<T>& lhs, const quat<T> & rhs)
 {
-	x += rhs.x;
-	y += rhs.y;
-	z += rhs.z;
-	w += rhs.w;
-	return *this;
+	lhs.x += rhs.x;
+	lhs.y += rhs.y;
+	lhs.z += rhs.z;
+	lhs.w += rhs.w;
+	return lhs;
 }
 
 template <typename T>
-inline quat<T> quat<T>::operator-(const quat & rhs) const
+inline quat<T> operator-(const quat<T>& lhs, const quat<T>& rhs)
 {
-	quat out(*this);
+	quat out(lhs);
 	out -= rhs;
 	return out;
 }
 
 template <typename T>
-inline quat<T> & quat<T>::operator-=(const quat & rhs)
+inline quat<T> & operator-=(quat<T>& lhs, const quat<T>& rhs)
 {
-	x -= rhs.x;
-	y -= rhs.y;
-	z -= rhs.z;
-	w -= rhs.w;
-	return *this;
+	lhs.x -= rhs.x;
+	lhs.y -= rhs.y;
+	lhs.z -= rhs.z;
+	lhs.w -= rhs.w;
+	return lhs;
 }
 
 template <typename T>
-inline vec3<T> quat<T>::operator*(const vec3<T> & rhs)
+quat<T> operator-(const quat<T>& q)
 {
-	quat pcq = quat(rhs.x, rhs.y, rhs.z, 0.f) * quat(-x, -y, -z, w);
-	quat q = *this * pcq;
+	return quat(
+		-q.x,
+		-q.y,
+		-q.z,
+		-q.w
+	);
+}
+
+template <typename T>
+inline vec3<T> operator*(const quat<T>& lhs, const vec3<T> & rhs)
+{
+	quat pcq = quat(rhs.x, rhs.y, rhs.z, 0.f) * quat(-lhs.x, -lhs.y, -lhs.z, lhs.w);
+	quat q = lhs * pcq;
 	return vec3<T>(q.x, q.y, q.z);
 }
 

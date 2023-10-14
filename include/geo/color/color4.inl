@@ -100,6 +100,12 @@ inline color4<T> color4<T>::linear2srgb(const color4<T>& color)
 	);
 }
 
+template<typename T>
+inline color4<T> color4<T>::lerp(const color4<T>& a, const color4<T>& b, real_t t)
+{
+	return geometry::lerp(a, b, t);
+}
+
 template <typename T>
 inline bool operator==(const color4<T> &lhs, const color4<T> &rhs)
 {

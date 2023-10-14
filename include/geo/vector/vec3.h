@@ -53,6 +53,8 @@ struct vec3 {
 	static T dot(const vec3& lhs, const norm3<T>& rhs);
 	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec3 cross(const vec3 & lhs, const vec3 & rhs);
+
+	static vec3<T> lerp(const vec3<T>& a, const vec3<T>& b, real_t t);
 };
 
 template <typename T>

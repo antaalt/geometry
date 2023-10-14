@@ -54,9 +54,15 @@ inline const T & point3<T>::operator[](size_t index) const
 }
 
 template <typename T>
-inline T point3<T>::distance(const point3<T> &lhs, const point3<T> &rhs)
+inline real_t point3<T>::distance(const point3<T> &lhs, const point3<T> &rhs)
 {
 	return vec3<T>(rhs - lhs).norm();
+}
+
+template <typename T>
+inline point3<T> point3<T>::lerp(const point3<T>& from, const point3<T>& to, real_t t)
+{
+	return geometry::lerp(from, to, t);
 }
 
 template <typename T>

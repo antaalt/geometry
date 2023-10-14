@@ -30,24 +30,52 @@ struct quat {
 	T norm() const;
 
 	static quat identity();
+	static quat inverse(const quat& quaternion);
 	static quat conjuguate(const quat &quaternion);
 	static quat normalize(const quat &quaternion);
 	static quat axis(const vec3<T> &axis, const angle<T> &angle);
 	static quat euler(angle<T> yaw, angle<T> pitch, angle<T> roll); // z, y, x
-
-	quat operator*(real_t scalar) const;
-	quat &operator*=(real_t scalar);
-
-	quat operator*(const quat &rhs) const;
-	quat &operator*=(const quat &rhs);
-
-	quat operator+(const quat &rhs) const;
-	quat &operator+=(const quat &rhs);
-
-	quat operator-(const quat &rhs) const;
-	quat &operator-=(const quat &rhs);
-
-	vec3<T> operator*(const vec3<T> &rhs);
+	static real_t dot(const quat& lhs, const quat& rhs);
+	static quat slerp(const quat& from, const quat& to, real_t t);
 };
+
+
+template <typename T>
+bool operator==(const quat<T>& lhs, const quat<T>& rhs);
+template <typename T>
+bool operator!=(const quat<T>& lhs, const quat<T>& rhs);
+
+template <typename T>
+quat<T> operator*(const quat<T>& lhs, real_t rhs);
+template <typename T>
+quat<T> operator*(real_t lhs, const quat<T>& rhs);
+template <typename T>
+quat<T>& operator*=(quat<T>& lhs, real_t rhs);
+
+template <typename T>
+quat<T> operator/(const quat<T>& lhs, real_t rhs);
+template <typename T>
+quat<T>& operator/=(quat<T>& lhs, real_t rhs);
+
+template <typename T>
+quat<T> operator*(const quat<T>& lhs, const quat<T>& rhs);
+template <typename T>
+quat<T>& operator*=(quat<T>& lhs, const quat<T>& rhs);
+
+template <typename T>
+quat<T> operator+(const quat<T>& lhs, const quat<T>& rhs);
+template <typename T>
+quat<T>& operator+=(quat<T>& lhs, const quat<T>& rhs);
+
+template <typename T>
+quat<T> operator-(const quat<T>& lhs, const quat<T>& rhs);
+template <typename T>
+quat<T>& operator-=(quat<T>& lhs, const quat<T>& rhs);
+
+template <typename T>
+quat<T> operator-(const quat<T>& quat);
+
+template <typename T>
+vec3<T> operator*(const quat<T>& lhs, const vec3<T>& rhs);
 
 }
