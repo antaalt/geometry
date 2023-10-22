@@ -21,22 +21,22 @@ struct color4 {
 	};
 	color4();
 	explicit color4(T value);
-	template <typename U>
-	explicit color4(const color4<U> &value);
 	explicit color4(T r, T g, T b, T a);
+	template <typename U>
+	explicit color4(const color4<U>& color);
 	explicit color4(const vec3<T> &vec, T a);
 	explicit color4(const vec4<T> &vec);
 
 	T &operator[](size_t index);
 	const T &operator[](size_t index) const;
 
-	template <typename U = T, typename = IsFloatingPoint<U>>
-	T luminance() const;
+	real_t luminance() const;
+	uint32_t toUint32();
+	void fromUint32(uint32_t value);
+	bool fromHexa(const char* hex_code);
 
-	template <typename U = T, typename = IsFloatingPoint<U>>
-	static color4<T> srgb2linear(const color4<T> &color);
-	template <typename U = T, typename = IsFloatingPoint<U>>
-	static color4<T> linear2srgb(const color4<T> &color);
+	static color4<real_t> srgb2linear(const color4<byte_t> &color);
+	static color4<byte_t> linear2srgb(const color4<real_t> &color);
 
 	static color4<T> lerp(const color4<T>& a, const color4<T>& b, real_t t);
 };

@@ -13,11 +13,18 @@ inline color4<T>::color4(T value) :
 {
 }
 
-template<typename T>
-template<typename U>
-inline color4<T>::color4(const color4<U>& value) :
-	color4(static_cast<T>(value.r), static_cast<T>(value.g), static_cast<T>(value.b), static_cast<T>(value.a))
+template<>
+template<>
+inline color4<byte_t>::color4(const color4<real_t>& value)
 {
+	*this = linear2srgb(value);
+}
+
+template<>
+template<>
+inline color4<real_t>::color4(const color4<byte_t>& value)
+{
+	*this = srgb2linear(value);
 }
 
 template <typename T>
@@ -51,52 +58,122 @@ inline const T & color4<T>::operator[](size_t index) const
 }
 
 template<typename T>
-template <typename U, typename>
-inline T color4<T>::luminance() const
+inline real_t color4<T>::luminance() const
 {
-	static const color3<T> l(0.2126f, 0.7152f, 0.0722f);
-	return r * l.r + g * l.g + b * l.b;
+	if constexpr (std::is_same<real_t, T>::value)
+	{
+		static const color3<T> l(0.2126f, 0.7152f, 0.0722f);
+		return r * l.r + g * l.g + b * l.b;
+	}
+	else
+	{
+		static_assert(false);
+	}
 }
 
 template<typename T>
-inline T srgb2linear4f(T value)
+inline uint32_t color4<T>::toUint32()
 {
-	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
-	if (value <= T(0.04045))
-		return value * T(1) / T(12.92);
-	return pow<T>((value + T(0.055)) * T(1) / T(1.055), T(2.4));
+	if constexpr (std::is_same<byte_t, T>::value)
+	{
+		return static_cast<uint32_t>(a << 24) | static_cast<uint32_t>(b << 16) | static_cast<uint32_t>(g << 8) | static_cast<uint32_t>(r << 0);
+	}
+	else if constexpr (std::is_same<real_t, T>::value)
+	{
+		color4<byte_t> color = linear2srgb(*this);
+		return static_cast<uint32_t>(color.a << 24) | static_cast<uint32_t>(color.b << 16) | static_cast<uint32_t>(color.g << 8) | static_cast<uint32_t>(color.r << 0);
+	}
+	else
+	{
+		static_assert(false);
+	}
+}
+template<typename T>
+inline void color4<T>::fromUint32(uint32_t value)
+{
+	if constexpr (std::is_same<byte_t, T>::value)
+	{
+		r = (value >> 0) & 0xFF;
+		g = (value >> 8) & 0xFF;
+		b = (value >> 16) & 0xFF;
+		a = (value >> 24) & 0xFF;
+	}
+	else if constexpr (std::is_same<real_t, T>::value)
+	{
+		color4<byte_t> color;
+		color.r = (value >> 0) & 0xFF;
+		color.g = (value >> 8) & 0xFF;
+		color.b = (value >> 16) & 0xFF;
+		color.a = (value >> 24) & 0xFF;
+		*this = srgb2linear(color);
+	}
+	else
+	{
+		static_assert(false);
+	}
 }
 
 template<typename T>
-inline T linear2srgb4f(T value)
+inline bool color4<T>::fromHexa(const char* hex_code)
 {
-	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
-	if (value <= T(0.0031308))
-		return T(12.92) * value;
-	return T(1.055) * pow<T>(value, T(1) / T(2.4)) - T(0.055);
+	size_t len = strlen(hex_code);
+	if (len == 7 && hex_code[0] == '#')
+	{
+		char* endptr;
+		unsigned long value = strtoul(hex_code + 1, endptr, 16);
+		if (endptr == hex_code || value > 0xFFFFFFFF)
+			return false;
+		fromUint32(static_cast<uint32_t>(value));
+		return true;
+	}
+	else if (len == 6 && std::isdigit(hex_code[0]))
+	{
+		char* endptr;
+		unsigned long value = strtoul(hex_code, endptr, 16);
+		if (endptr == hex_code || value > 0xFFFFFFFF)
+			return false;
+		fromUint32(static_cast<uint32_t>(value));
+		return true;
+	}
+	else
+	{
+		return false; // Invalid input.
+	}
+}
+
+inline real_t srgb2linear(real_t value)
+{
+	if (value <= real_t(0.04045))
+		return value * real_t(1) / real_t(12.92);
+	return pow<real_t>((value + real_t(0.055)) * real_t(1) / real_t(1.055), real_t(2.4));
+}
+
+inline real_t linear2srgb(real_t value)
+{
+	if (value <= real_t(0.0031308))
+		return real_t(12.92) * value;
+	return real_t(1.055) * pow<real_t>(value, real_t(1) / real_t(2.4)) - real_t(0.055);
 }
 
 template<typename T>
-template <typename U, typename>
-inline color4<T> color4<T>::srgb2linear(const color4<T>& color)
+inline color4<real_t> color4<T>::srgb2linear(const color4<byte_t>& color)
 {
-	return color4<T>(
-		srgb2linear4f<T>(color.r),
-		srgb2linear4f<T>(color.g),
-		srgb2linear4f<T>(color.b),
-		color.a
+	return color4<real_t>(
+		static_cast<real_t>(geometry::srgb2linear(color.r / 255.f)),
+		static_cast<real_t>(geometry::srgb2linear(color.g / 255.f)),
+		static_cast<real_t>(geometry::srgb2linear(color.b / 255.f)),
+		static_cast<byte_t>(color.a / 255.f)
 	);
 }
 
 template<typename T>
-template <typename U, typename>
-inline color4<T> color4<T>::linear2srgb(const color4<T>& color)
+inline color4<byte_t> color4<T>::linear2srgb(const color4<real_t>& color)
 {
-	return color4<T>(
-		linear2srgb4f<T>(color.r),
-		linear2srgb4f<T>(color.g),
-		linear2srgb4f<T>(color.b),
-		color.a
+	return color4<byte_t>(
+		static_cast<byte_t>(saturate(geometry::linear2srgb(color.r) * 255.f)),
+		static_cast<byte_t>(saturate(geometry::linear2srgb(color.g) * 255.f)),
+		static_cast<byte_t>(saturate(geometry::linear2srgb(color.b) * 255.f)),
+		static_cast<byte_t>(saturate(color.a * 255.f))
 	);
 }
 

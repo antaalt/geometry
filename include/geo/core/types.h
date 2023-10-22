@@ -9,6 +9,6 @@ using real_t = double;
 #else
 using real_t = float;
 #endif
-using byte = uint8_t;
+using byte_t = uint8_t;
 
 };

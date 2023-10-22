@@ -53,21 +53,19 @@ inline T color3<T>::luminance() const
 }
 
 template<typename T>
-inline T srgb2linear3f(T value)
+inline real_t srgb2linear(real_t value)
 {
-	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
 	if (value <= T(0.04045))
 		return value * T(1) / T(12.92);
 	return pow<T>((value + T(0.055)) * T(1) / T(1.055), T(2.4));
 }
 
 template<typename T>
-inline T linear2srgb3f(T value)
+inline real_t linear2srgb(real_t value)
 {
-	static_assert(std::is_floating_point<T>::value == true, "Type need to be real");
-	if (value <= T(0.0031308))
-		return T(12.92) * value;
-	return T(1.055) * pow<T>(value, T(1) / T(2.4)) - T(0.055);
+	if (value <= real_t(0.0031308))
+		return real_t(12.92) * value;
+	return real_t(1.055) * pow<real_t>(value, real_t(1) / real_t(2.4)) - real_t(0.055);
 }
 
 template<typename T>
@@ -75,9 +73,9 @@ template <typename U, typename>
 inline color3<T> color3<T>::srgb2linear(const color3<T>& color)
 {
 	return color3<T>(
-		srgb2linear3f<T>(color.r),
-		srgb2linear3f<T>(color.g),
-		srgb2linear3f<T>(color.b)
+		srgb2linear(color.r),
+		srgb2linear(color.g),
+		srgb2linear(color.b)
 	);
 }
 
@@ -86,9 +84,9 @@ template <typename U, typename>
 inline color3<T> color3<T>::linear2srgb(const color3<T>& color)
 {
 	return color3<T>(
-		linear2srgb3f<T>(color.r),
-		linear2srgb3f<T>(color.g),
-		linear2srgb3f<T>(color.b)
+		linear2srgb(color.r),
+		linear2srgb(color.g),
+		linear2srgb(color.b)
 	);
 }
 
