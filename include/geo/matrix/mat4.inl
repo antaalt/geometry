@@ -260,6 +260,16 @@ inline mat4<T> mat4<T>::translate(const vec3<T> &translation)
 }
 
 template <typename T>
+inline mat4<T> mat4<T>::translate(const mat4<T>& src, const vec3<T>& translation)
+{
+	mat4 dst(src);
+	dst.cols[3].x += translation.x;
+	dst.cols[3].y += translation.y;
+	dst.cols[3].z += translation.z;
+	return dst;
+}
+
+template <typename T>
 inline mat4<T> mat4<T>::scale(const vec3<T> &scale)
 {
 	return mat4<T>(

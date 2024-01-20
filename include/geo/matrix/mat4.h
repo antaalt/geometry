@@ -53,6 +53,7 @@ struct mat4 {
 	static mat4 identity();
 	static mat4 translate(const point3<T>& translation);
 	static mat4 translate(const vec3<T> &translation);
+	static mat4 translate(const mat4<T>& src, const vec3<T>& translation);
 	static mat4 rotate(const vec3<T> &axis, angle<T> angle);
 	static mat4 rotate(const quat<T>& quat);
 	static mat4 scale(const vec3<T> &scale);
