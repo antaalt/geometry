@@ -54,6 +54,12 @@ struct vec3 {
 	template <typename U = T, typename = IsFloatingPoint<U>>
 	static vec3 cross(const vec3 & lhs, const vec3 & rhs);
 
+	static vec3<T> abs(const vec3& value);
+	static vec3<T> min(const vec3& lhs, const vec3& rhs);
+	static vec3<T> max(const vec3& lhs, const vec3& rhs);
+	static T distance(const vec3& lhs, const vec3& rhs);
+	static T length(const vec3& lhs);
+
 	static vec3<T> lerp(const vec3<T>& a, const vec3<T>& b, real_t t);
 };
 

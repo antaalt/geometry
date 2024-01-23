@@ -110,6 +110,49 @@ inline vec3<T> vec3<T>::cross(const vec3<T> & lhs, const vec3<T> & rhs)
 }
 
 template<typename T>
+inline vec3<T> vec3<T>::abs(const vec3<T>& value)
+{
+	return vec3<T>(
+		geometry::abs<T>(value.x),
+		geometry::abs<T>(value.y),
+		geometry::abs<T>(value.z)
+	);
+}
+
+template<typename T>
+inline vec3<T> vec3<T>::min(const vec3& lhs, const vec3& rhs)
+{
+	return vec3<T>(
+		geometry::min<T>(lhs.x, rhs.x),
+		geometry::min<T>(lhs.y, rhs.y),
+		geometry::min<T>(lhs.z, rhs.z)
+	);
+}
+
+template<typename T>
+inline vec3<T> vec3<T>::max(const vec3& lhs, const vec3& rhs)
+{
+	return vec3<T>(
+		geometry::max<T>(lhs.x, rhs.x),
+		geometry::max<T>(lhs.y, rhs.y),
+		geometry::max<T>(lhs.z, rhs.z)
+	);
+}
+
+template<typename T>
+inline T vec3<T>::distance(const vec3& lhs, const vec3& rhs)
+{
+	vec3 diff = rhs - lhs;
+	return geometry::sqrt(vec3<T>::dot(diff, diff));
+}
+
+template<typename T>
+inline T vec3<T>::length(const vec3& lhs)
+{
+	return lhs.norm();
+}
+
+template<typename T>
 inline vec3<T> vec3<T>::lerp(const vec3<T>& a, const vec3<T>& b, real_t t)
 {
 	return geometry::lerp(a, b, t);
