@@ -65,6 +65,10 @@ vec3<T> operator*(const mat3<T>& lhs, const vec3<T>& rhs);
 template <typename T>
 vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs);
 template <typename T>
+mat3<T> operator*(const mat3<T>& lhs, T rhs);
+template <typename T>
+mat3<T> operator*(T lhs, const mat3<T>& rhs);
+template <typename T>
 mat3<T>& operator*=(mat3<T>& lhs, const mat3<T>& rhs);
 
 }

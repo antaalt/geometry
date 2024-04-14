@@ -229,6 +229,24 @@ vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs)
 		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y
 	);
 }
+template <typename T>
+mat3<T> operator*(const mat3<T>& lhs, T rhs)
+{
+	return mat3<T>(
+		col3<T>(lhs.cols[0].x * rhs, lhs.cols[0].y * rhs, lhs.cols[0].z * rhs),
+		col3<T>(lhs.cols[1].x * rhs, lhs.cols[1].y * rhs, lhs.cols[1].z * rhs),
+		col3<T>(lhs.cols[2].x * rhs, lhs.cols[2].y * rhs, lhs.cols[2].z * rhs)
+	);
+}
+template <typename T>
+mat3<T> operator*(T lhs, const mat3<T>& rhs)
+{
+	return mat3<T>(
+		col3<T>(lhs * rhs.cols[0].x, lhs * rhs.cols[0].y, lhs * rhs.cols[0].z),
+		col3<T>(lhs * rhs.cols[1].x, lhs * rhs.cols[1].y, lhs * rhs.cols[1].z),
+		col3<T>(lhs * rhs.cols[2].x, lhs * rhs.cols[2].y, lhs * rhs.cols[2].z)
+	);
+}
 
 template <typename T>
 mat3<T>& operator*=(mat3<T>& lhs, const mat3<T>& rhs)

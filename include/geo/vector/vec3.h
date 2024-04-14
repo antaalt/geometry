@@ -80,6 +80,17 @@ vec3<T> operator/(const vec3<T> &lhs, T rhs);
 template <typename T>
 vec3<T> &operator/=(vec3<T> &lhs, T rhs);
 
+
+template <typename T>
+vec3<T> operator/(const vec3<T>& lhs, const vec3<T>& rhs);
+template <typename T>
+vec3<T>& operator/=(vec3<T>& lhs, const vec3<T>& rhs);
+
+template <typename T>
+vec3<T> operator*(const vec3<T>& lhs, const vec3<T>& rhs);
+template <typename T>
+vec3<T>& operator*=(vec3<T>& lhs, const vec3<T>& rhs);
+
 template <typename T>
 vec3<T> operator+(const vec3<T> &lhs, const vec3<T> &rhs);
 template <typename T>

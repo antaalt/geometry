@@ -220,6 +220,40 @@ inline vec3<T> & operator/=(vec3<T> & lhs, T rhs)
 }
 
 template <typename T>
+vec3<T> operator/(const vec3<T>& lhs, const vec3<T>& rhs)
+{
+	vec3<T> out(lhs);
+	out /= rhs;
+	return out;
+}
+
+template <typename T>
+vec3<T>& operator/=(vec3<T>& lhs, const vec3<T>& rhs)
+{
+	lhs.x /= rhs.x;
+	lhs.y /= rhs.y;
+	lhs.z /= rhs.z;
+	return lhs;
+}
+
+template <typename T>
+vec3<T> operator*(const vec3<T>& lhs, const vec3<T>& rhs)
+{
+	vec3<T> out(lhs);
+	out *= rhs;
+	return out;
+}
+
+template <typename T>
+vec3<T>& operator*=(vec3<T>& lhs, const vec3<T>& rhs)
+{
+	lhs.x *= rhs.x;
+	lhs.y *= rhs.y;
+	lhs.z *= rhs.z;
+	return lhs;
+}
+
+template <typename T>
 inline vec3<T> operator+(const vec3<T> &lhs, const vec3<T> &rhs)
 {
 	return vec3<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);

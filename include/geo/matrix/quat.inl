@@ -92,15 +92,15 @@ inline quat<T> quat<T>::identity()
 }
 
 template <typename T>
-inline quat<T> inverse(const quat<T>& quaternion)
+inline quat<T> quat<T>::inverse(const quat<T>& quaternion)
 {
 	quat<T> out;
 	T n = quaternion.norm();
-	out = quaternion.onjugate();
-	out.x /= norm;
-	out.y /= norm;
-	out.z /= norm;
-	out.w /= norm;
+	out = conjuguate(quaternion);
+	out.x /= n;
+	out.y /= n;
+	out.z /= n;
+	out.w /= n;
 	return out;
 }
 
