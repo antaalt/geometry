@@ -214,6 +214,7 @@ inline mat3<T> operator*(const mat3<T>& lhs, const mat3<T> &rhs)
 template <typename T>
 vec3<T> operator*(const mat3<T>& lhs, const vec3<T>& rhs)
 {
+	// Column vector
 	return vec3<T>(
 		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x * rhs.z,
 		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y * rhs.z,
@@ -222,8 +223,19 @@ vec3<T> operator*(const mat3<T>& lhs, const vec3<T>& rhs)
 }
 
 template <typename T>
+vec3<T> operator*(const vec3<T>& lhs, const mat3<T>& rhs)
+{
+	// Row vector
+	return vec3<T>(
+		lhs.x * rhs[0].x * lhs.y + rhs[0].y * lhs.z + rhs[0].z,
+		lhs.x * rhs[1].x * lhs.y + rhs[1].y * lhs.z + rhs[1].z,
+		lhs.x * rhs[2].x * lhs.y + rhs[2].y * lhs.z + rhs[2].z
+	);
+}
+template <typename T>
 vec2<T> operator*(const mat3<T>& lhs, const vec2<T>& rhs)
 {
+	// Should handle w division here ?
 	return vec2<T>(
 		lhs[0].x * rhs.x + lhs[1].x * rhs.y + lhs[2].x,
 		lhs[0].y * rhs.x + lhs[1].y * rhs.y + lhs[2].y
