@@ -30,6 +30,14 @@ inline vec3<T>::vec3(U x, U y, U z) :
 }
 
 template <typename T>
+template <typename U>
+inline vec3<T>::vec3(const vec3<U>& value) :
+	vec3<T>(value.x, value.y, value.z)
+{
+
+}
+
+template <typename T>
 inline vec3<T>::vec3(const norm3<T> &normal) : 
 	x(normal.x), y(normal.y), z(normal.z)
 {

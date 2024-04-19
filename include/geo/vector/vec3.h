@@ -32,6 +32,8 @@ struct vec3 {
 	explicit vec3(T x, T y, T z);
 	template <typename U>
 	explicit vec3(U x, U y, U z);
+	template <typename U>
+	explicit vec3(const vec3<U>& value);
 	explicit vec3(const norm3<T> &normal);
 	explicit vec3(const point3<T> &point);
 	explicit vec3(const col3<T> &col);
