@@ -10,6 +10,8 @@
 #if !defined(GEOMETRY_CLIP_SPACE_NEGATIVE) && !defined(GEOMETRY_CLIP_SPACE_POSITIVE)
 #define GEOMETRY_CLIP_SPACE_NEGATIVE
 #endif
+// Vulkan has reversed Y
+//#define GEOMETRY_REVERSED_Y 
 // Precision of library
 #if !defined(GEOMETRY_SINGLE_PRECISION) && !defined(GEOMETRY_DOUBLE_PRECISION)
 #define GEOMETRY_SINGLE_PRECISION

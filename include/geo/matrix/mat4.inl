@@ -353,7 +353,11 @@ inline mat4<T> mat4<T>::perspective(const angle<T> &fovY, real_t ratio, real_t z
 	const T f = T(1) / tan(fovY / T(2));
 	return mat4(
 		col4<T>(f / ratio, T(0), T(0), T(0)),
+#if defined(GEOMETRY_REVERSED_Y)
+		col4<T>(T(0), -f, T(0), T(0)),
+#else
 		col4<T>(T(0), f, T(0), T(0)),
+#endif
 #if defined(GEOMETRY_RIGHT_HANDED)
 #if defined(GEOMETRY_CLIP_SPACE_POSITIVE)
 		col4<T>(T(0), T(0), zFar / (zNear - zFar), -T(1)),
