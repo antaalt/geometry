@@ -14,6 +14,11 @@
 #if !defined(GEOMETRY_SINGLE_PRECISION) && !defined(GEOMETRY_DOUBLE_PRECISION)
 #define GEOMETRY_SINGLE_PRECISION
 #endif
+// Orientation of transform
+// TODO: fix projection & co depending on these values.
+#if !defined(GEOMETRY_Z_UP) && !defined(GEOMETRY_Y_UP)
+#define GEOMETRY_Y_UP
+#endif
 
 #include <geo/math/scientific.h>
 #include <geo/math/sampling.h>

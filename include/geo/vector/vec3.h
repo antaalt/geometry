@@ -61,8 +61,17 @@ struct vec3 {
 	static vec3<T> max(const vec3& lhs, const vec3& rhs);
 	static T distance(const vec3& lhs, const vec3& rhs);
 	static T length(const vec3& lhs);
-
 	static vec3<T> lerp(const vec3<T>& a, const vec3<T>& b, real_t t);
+
+	static vec3<T> zero();
+	static vec3<T> one();
+	
+	static vec3<T> up();
+	static vec3<T> down();
+	static vec3<T> forward();
+	static vec3<T> backward();
+	static vec3<T> right();
+	static vec3<T> left();
 };
 
 template <typename T>

@@ -174,6 +174,76 @@ inline vec3<T> vec3<T>::normalize(const vec3<T> &vec)
 }
 
 template <typename T>
+inline vec3<T> vec3<T>::zero()
+{
+	return vec3f(0.f);
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::one()
+{
+	return vec3f(1.f);
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::up()
+{
+#if defined(GEOMETRY_Y_UP)
+	return vec3f(0.f, 1.f, 0.f);
+#elif defined(GEOMETRY_Z_UP)
+	return vec3f(0.f, 0.f, 1.f);
+#endif
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::down()
+{
+	return -up();
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::forward()
+{
+	// Arbitrary choice. Could be controlled by user ?
+#if defined(GEOMETRY_Y_UP)
+	return vec3f(0.f, 0.f, 1.f); // z forward
+#elif defined(GEOMETRY_Z_UP)
+	return vec3f(1.f, 0.f, 0.f); // x forward
+#endif
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::backward()
+{
+	return -forward();
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::right()
+{
+	// Depend on up & forward & handedness.
+#if defined(GEOMETRY_Y_UP)
+#if defined(GEOMETRY_RIGHT_HANDED)
+	return vec3f(-1.f, 0.f, 0.f);
+#elif defined(GEOMETRY_LEFT_HANDED)
+	return vec3f(1.f, 0.f, 0.f);
+#endif
+#elif defined(GEOMETRY_Z_UP)
+#if defined(GEOMETRY_RIGHT_HANDED)
+	return vec3f(0.f, -1.f, 0.f);
+#elif defined(GEOMETRY_LEFT_HANDED)
+	return vec3f(0.f, 1.f, 1.f);
+#endif
+#endif
+}
+
+template <typename T>
+inline vec3<T> vec3<T>::left()
+{
+	return -right();
+}
+
+template <typename T>
 inline bool operator==(const vec3<T> & lhs, const vec3<T> & rhs)
 {
 	return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
