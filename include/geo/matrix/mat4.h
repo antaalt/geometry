@@ -57,7 +57,7 @@ struct mat4 {
 	static mat4 rotate(const vec3<T> &axis, angle<T> angle);
 	static mat4 rotate(const quat<T>& quat);
 	static mat4 scale(const vec3<T> &scale);
-	static mat4 TRS(const vec3<T> & t, const quat<T> & r, const vec3<T> & s);
+	static mat4 TRS(const point3<T> & t, const quat<T> & r, const vec3<T> & s);
 	static mat4 inverse(const mat4 &mat);
 	static mat4 transpose(const mat4& mat);
 	static mat4 perspective(const angle<T> &fovY, real_t ratio, real_t nearZ, real_t farZ);
@@ -67,7 +67,7 @@ struct mat4 {
 	static mat4 lookAt(const point3<T>& eye, const point3<T>& target, const norm3<T>& up = norm3<T>(0, 1, 0));
 	static mat4 from2D(const mat3<T>& mat);
 	static vec3<T> extractScale(const mat4<T>& matrix);
-	static vec3<T> extractTranslation(const mat4<T>& matrix);
+	static point3<T> extractTranslation(const mat4<T>& matrix);
 	static quat<T> extractRotation(const mat4<T>& matrix);
 
 	T det() const;

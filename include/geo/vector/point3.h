@@ -33,6 +33,9 @@ struct point3 {
 
 	static real_t distance(const point3 &lhs, const point3 &rhs);
 	static point3 lerp(const point3<T>& from, const point3<T>& to, real_t t);
+
+	static point3<T> zero();
+	static point3<T> one();
 };
 
 

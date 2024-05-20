@@ -65,6 +65,18 @@ inline point3<T> point3<T>::lerp(const point3<T>& from, const point3<T>& to, rea
 	return geometry::lerp(from, to, t);
 }
 
+template<typename T>
+inline point3<T> point3<T>::zero()
+{
+	return point3<T>(T(0));
+}
+
+template<typename T>
+inline point3<T> point3<T>::one()
+{
+	return point3<T>(T(1));
+}
+
 template <typename T>
 inline bool operator==(const point3<T> &lhs, const point3<T> &rhs)
 {

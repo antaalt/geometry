@@ -281,7 +281,7 @@ inline mat4<T> mat4<T>::scale(const vec3<T> &scale)
 }
 
 template <typename T>
-inline mat4<T> mat4<T>::TRS(const vec3<T> & t, const quat<T> & r, const vec3<T> & s)
+inline mat4<T> mat4<T>::TRS(const point3<T> & t, const quat<T> & r, const vec3<T> & s)
 {
 	return translate(t) * rotate(r) * scale(s);
 }
@@ -494,9 +494,9 @@ inline vec3<T> mat4<T>::extractScale(const mat4<T>& matrix)
 }
 
 template<typename T>
-inline vec3<T> mat4<T>::extractTranslation(const mat4<T>& matrix)
+inline point3<T> mat4<T>::extractTranslation(const mat4<T>& matrix)
 {
-	return vec3<T>(matrix[3]);
+	return point3<T>(matrix[3]);
 }
 
 template<typename T>
@@ -506,9 +506,9 @@ inline quat<T> mat4<T>::extractRotation(const mat4<T>& matrix)
 	// but as this lib do not let us change that, it does not matter
 	vec3<T> scale = extractScale(matrix);
 	mat3<T> rotation(
-		vec3<T>(matrix[0]) / scale.x,
-		vec3<T>(matrix[1]) / scale.y,
-		vec3<T>(matrix[2]) / scale.z
+		col3(vec3<T>(matrix[0]) / scale.x),
+		col3(vec3<T>(matrix[1]) / scale.y),
+		col3(vec3<T>(matrix[2]) / scale.z)
 	);
 	return quat<T>(rotation);
 }
