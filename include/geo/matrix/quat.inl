@@ -142,17 +142,15 @@ inline quat<T> quat<T>::axis(const vec3<T> & axis, const angle<T> & angle)
 template <typename T>
 inline quat<T> quat<T>::euler(angle<T> yaw, angle<T> pitch, angle<T> roll)
 {
-	T c1 = cos(yaw / T(2));
-	T s1 = sin(yaw / T(2));
-	T c2 = cos(pitch / T(2));
-	T s2 = sin(pitch / T(2));
-	T c3 = cos(roll / T(2));
-	T s3 = sin(roll / T(2));
+	T cr, sr, cp, sp, cy, sy;
+	sincos(roll * T(0.5), sr, cr);
+	sincos(pitch * T(0.5), sp, cp);
+	sincos(yaw * T(0.5), sy, cy);
 	return quat<T>(
-		s1 * c2 * c3 + c1 * s2 * s3,
-		c1 * s2 * c3 - s1 * c2 * s3,
-		c1 * c2 * s3 - s1 * s2 * c3,
-		c1 * c2 * c3 + s1 * s2 * s3
+			cr * cp * cy + sr * sp * sy,
+			sr * cp * cy - cr * sp * sy,
+			cr * sp * cy + sr * cp * sy,
+			cr * cp * sy - sr * sp * cy
 	);
 }
 
