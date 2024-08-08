@@ -67,6 +67,13 @@ inline T cot(angle<T> value)
 }
 
 template <typename T>
+inline void sincos(angle<T> value, T& s, T& c)
+{
+	s = sin<T>(value);
+	c = cos<T>(value);
+}
+
+template <typename T>
 inline angle<T> arccos(T value)
 {
 	// std::acos return nan out that ranges.

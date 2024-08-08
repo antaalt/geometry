@@ -23,6 +23,7 @@ template <typename T> T cos(angle<T> value);
 template <typename T> T sin(angle<T> value);
 template <typename T> T tan(angle<T> value);
 template <typename T> T cot(angle<T> value);
+template <typename T> void sincos(angle<T> value, T& s, T& c);
 template <typename T> angle<T> arccos(T value);
 template <typename T> angle<T> arcsin(T value);
 template <typename T> angle<T> arctan(T value);
